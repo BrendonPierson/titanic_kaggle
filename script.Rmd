@@ -8,9 +8,8 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
-setwd("/Users/bp/workspace/exercises/kaggle/titanic")
+setwd("/Users/ashlynkaran/Desktop/Kaggle/titanic_kaggle")
 library('caret')
-install.packages('dplyr')
 library('e1071')
 library('dplyr') 
 library('rpart')
@@ -25,43 +24,162 @@ When you save the notebook, an HTML file containing the code and output will be 
 train <- read.csv('./input/train.csv')
 test  <- read.csv('./input/test.csv')
 
-full  <- bind_rows(train, test)
+#full  <- bind_rows(train, test)
 
 # check data
-str(full)
+str(train)
+str(test)
 ```
 ```{r}
-full$Cabin <- substring(full$Cabin, 1, 1)
+train$Cabin <- substring(train$Cabin, 1, 1)
+test$Cabin <- substring(test$Cabin, 1, 1)
 
-fullSubset <- full[,-which(names(full) %in% c("Ticket", "PassengerId"))]
+#Neither of these seem to be dropping the columns we want. But I don't think that matters.
+drops <- c("Ticket")
+trainSubset <- train[, !(names(train) %in% drops)]
+testSubset <- test[, !(names(test) %in% drops)]
+#trainSubset <- train[,-which(names(train) %in% c("Ticket", "PassengerId"))]
+#testSubset <- test[,-which(names(test) %in% c("Ticket", "PassengerId"))]
 
-fullSubset$Title <- gsub('(.*, )|(\\..*)', '', fullSubset$Name)
-fullSubset$Title <- factor(fullSubset$Title)
+#This gives us a Title column and gets rid of the names at the same time. 
+names(trainSubset)[names(trainSubset) == 'Name'] <- 'Title'
+trainSubset$Title <- gsub('(.*, )|(\\..*)', '', trainSubset$Title)
+trainSubset$Title <- factor(trainSubset$Title)
 
-fullSubset <- full[,-which(names(full) %in% c("Name"))]
+names(testSubset)[names(testSubset) == 'Name'] <- 'Title'
+testSubset$Title <- gsub('(.*, )|(\\..*)', '', testSubset$Title)
+testSubset$Title <- factor(testSubset$Title)
 
-fullSubset$Pclass <- factor(fullSubset$Pclass)
-fullSubset$Survived <- factor(fullSubset$Survived)
-fullSubset <- fullSubset[complete.cases(fullSubset),]
+rare_title <- c('Dona', 'Lady', 'the Countess','Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer')
+trainSubset$Title[trainSubset$Title == 'Mlle']        <- 'Miss'
+testSubset$Title[testSubset$Title == 'Mlle']        <- 'Miss'
+trainSubset$Title[trainSubset$Title == 'Ms']          <- 'Miss'
+testSubset$Title[testSubset$Title == 'Ms']          <- 'Miss'
+trainSubset$Title[trainSubset$Title == 'Mme']         <- 'Mrs' 
+testSubset$Title[testSubset$Title == 'Mme']         <- 'Mrs' 
+trainSubset$Title[trainSubset$Title %in% rare_title]  <- 'Rare Title'
+testSubset$Title[testSubset$Title %in% rare_title]  <- 'Rare Title'
 
-fullSubset
+
+#trainSubset <- train[,-which(names(train) %in% c("Name"))]
+#testSubset <- test[,-which(names(test) %in% c("Name"))]
+
+trainSubset$Pclass <- factor(trainSubset$Pclass)
+trainSubset$Survived <- factor(trainSubset$Survived)
+trainSubset <- trainSubset[complete.cases(trainSubset),]
+testSubset$Pclass <- factor(testSubset$Pclass)
+testSubset <- testSubset[complete.cases(testSubset),]
+
+trainSubset
+testSubset
 ```
-Train model
+Train model: logistic regression.
+Why? Outcome is binary. 
+
+```{r}
+formulaAll <- Survived ~ Pclass + Title + Sex + Age + SibSp + Parch + Fare + Cabin + Embarked
+logisticModelAll <- glm(formulaAll, data=trainSubset, family="binomial")
+
+summary(logisticModelAll)
+```
+Embarked has the highest p value so we will drop it from the model and use anova to compare the models.
+``` {r}
+formula8 <- Survived ~ Pclass + Title + Sex + Age + SibSp + Parch + Fare + Cabin 
+logisticModel8 <- glm(formula8, data=trainSubset, family="binomial")
+
+anova(logisticModel8, logisticModelAll, test = "Chisq")
+
+summary(logisticModel8)
+```
+There is no significant difference when we include embarked, so we'll leave it out. The next highest p values are within cabin, so we will take that out next.
+
+```{r}
+formula7 <- Survived ~ Pclass + Title + Sex + Age + SibSp + Parch + Fare 
+logisticModel7 <- glm(formula7, data=trainSubset, family="binomial")
+
+anova(logisticModel7, logisticModel8, test = "Chisq")
+
+summary(logisticModel7)
+```
+Cabin is also not significant. Now fare is the highest p value, taking out fare.
+```{r}
+formula6 <- Survived ~ Pclass + Title + Sex + Age + SibSp + Parch 
+logisticModel6 <- glm(formula6, data=trainSubset, family="binomial")
+
+anova(logisticModel6, logisticModel7, test = "Chisq")
+
+summary(logisticModel6)
+```
+Next taking out Parch. 
+```{r}
+formula5 <- Survived ~ Pclass + Title + Sex + Age + SibSp
+logisticModel5 <- glm(formula5, data=trainSubset, family="binomial")
+
+anova(logisticModel5, logisticModel6, test = "Chisq")
+
+summary(logisticModel5)
+```
+Parch is barely not significant (p = .05122)! Next lowest is title. This might be correlated with sex? Not sure why sex is NA. Maybe too similar to title. 
+```{r}
+formula4S <- Survived ~ Pclass + Sex + Age + SibSp
+logisticModel4S <- glm(formula4S, data=trainSubset, family="binomial")
+
+anova(logisticModel4S, logisticModel5, test = "Chisq")
+
+summary(logisticModel4)
+```
+There is a significant difference taking out title. Does that happen for sex also?
+```{r}
+
+formula4T <- Survived ~ Pclass + Title + Age + SibSp
+logisticModel4T <- glm(formula4T, data=trainSubset, family="binomial")
+
+anova(logisticModel4T, logisticModel5, test = "Chisq")
+anova(logisticModel4T, logisticModel4S, test = "Chisq")
+
+summary(logisticModel4T)
+```
+I think what this is telling me is that there is no difference between the model with sex and the model with title and sex, but that the title model works better than the sex model. 
+```{r}
+formula3A <- Survived ~ Pclass + Title + SibSp
+logisticModel3A <- glm(formula3A, data=trainSubset, family="binomial")
+
+anova(logisticModel3A, logisticModel4T, test = "Chisq")
+
+summary(logisticModel3A)
+
+```
+Everything else is significant, so model 4T wins?
+```{r}
+
+#This seems like it isn't working because solution is giving us numbers that are not 0 or 1. 
+prediction <- predict(logisticModel4T, testSubset)
+solution <- data.frame(PassengerID = testSubset$PassengerId, Survived = prediction)
+write.csv(solution, file = 'rf_mod_Solution.csv', row.names = F)
+
+solution
+
+```
+
+Train model: rpart
 ```{r}
 set.seed(100)
 
-trainSubset <- full[,]
+#trainSubset <- full[,]
 rpartTune <- train(Survived ~ ., data = trainSubset,
                    method="rpart2",
                    tuneLength = 10,
-                   trControl = trainControl(method = "cv"))
+                   trControl = trainControl(method = "cv"),
+                   na.action=na.exclude
+)
 
 plot(rpartTune)
 ```
-```{r}
+Train model: randomForest
+/*```{r}
 set.seed(999)
 rf_model <- randomForest(Survived ~ Pclass + Sex + Age + SibSp + Parch + 
                                             Fare + Embarked + Title + Cabin,
                                             data = trainSubset)
-```
+```*/
 
