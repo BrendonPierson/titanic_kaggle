@@ -1,0 +1,67 @@
+---
+title: "Titanic Data"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+setwd("/Users/bp/workspace/exercises/kaggle/titanic")
+library('caret')
+install.packages('dplyr')
+library('e1071')
+library('dplyr') 
+library('rpart')
+library('randomForest')
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
+
+```{r, message=FALSE, warning=FALSE}
+train <- read.csv('./input/train.csv')
+test  <- read.csv('./input/test.csv')
+
+full  <- bind_rows(train, test)
+
+# check data
+str(full)
+```
+```{r}
+full$Cabin <- substring(full$Cabin, 1, 1)
+
+fullSubset <- full[,-which(names(full) %in% c("Ticket", "PassengerId"))]
+
+fullSubset$Title <- gsub('(.*, )|(\\..*)', '', fullSubset$Name)
+fullSubset$Title <- factor(fullSubset$Title)
+
+fullSubset <- full[,-which(names(full) %in% c("Name"))]
+
+fullSubset$Pclass <- factor(fullSubset$Pclass)
+fullSubset$Survived <- factor(fullSubset$Survived)
+fullSubset <- fullSubset[complete.cases(fullSubset),]
+
+fullSubset
+```
+Train model
+```{r}
+set.seed(100)
+
+trainSubset <- full[,]
+rpartTune <- train(Survived ~ ., data = trainSubset,
+                   method="rpart2",
+                   tuneLength = 10,
+                   trControl = trainControl(method = "cv"))
+
+plot(rpartTune)
+```
+```{r}
+set.seed(999)
+rf_model <- randomForest(Survived ~ Pclass + Sex + Age + SibSp + Parch + 
+                                            Fare + Embarked + Title + Cabin,
+                                            data = trainSubset)
+```
+
