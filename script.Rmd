@@ -8,12 +8,11 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
-setwd("/Users/ashlynkaran/Desktop/Kaggle/titanic_kaggle")
-library('caret')
 library('e1071')
 library('dplyr') 
 library('rpart')
 library('randomForest')
+library('caret')
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
@@ -44,11 +43,11 @@ testSubset <- test[, !(names(test) %in% drops)]
 #This gives us a Title column and gets rid of the names at the same time. 
 names(trainSubset)[names(trainSubset) == 'Name'] <- 'Title'
 trainSubset$Title <- gsub('(.*, )|(\\..*)', '', trainSubset$Title)
-trainSubset$Title <- factor(trainSubset$Title)
+
 
 names(testSubset)[names(testSubset) == 'Name'] <- 'Title'
 testSubset$Title <- gsub('(.*, )|(\\..*)', '', testSubset$Title)
-testSubset$Title <- factor(testSubset$Title)
+
 
 rare_title <- c('Dona', 'Lady', 'the Countess','Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer')
 trainSubset$Title[trainSubset$Title == 'Mlle']        <- 'Miss'
@@ -59,16 +58,17 @@ trainSubset$Title[trainSubset$Title == 'Mme']         <- 'Mrs'
 testSubset$Title[testSubset$Title == 'Mme']         <- 'Mrs' 
 trainSubset$Title[trainSubset$Title %in% rare_title]  <- 'Rare Title'
 testSubset$Title[testSubset$Title %in% rare_title]  <- 'Rare Title'
-
+testSubset$Title <- factor(testSubset$Title)
+trainSubset$Title <- factor(trainSubset$Title)
 
 #trainSubset <- train[,-which(names(train) %in% c("Name"))]
 #testSubset <- test[,-which(names(test) %in% c("Name"))]
 
 trainSubset$Pclass <- factor(trainSubset$Pclass)
 trainSubset$Survived <- factor(trainSubset$Survived)
-trainSubset <- trainSubset[complete.cases(trainSubset),]
+#trainSubset <- trainSubset[complete.cases(trainSubset),]
 testSubset$Pclass <- factor(testSubset$Pclass)
-testSubset <- testSubset[complete.cases(testSubset),]
+#testSubset <- testSubset[complete.cases(testSubset),]
 
 trainSubset
 testSubset
@@ -153,9 +153,22 @@ Everything else is significant, so model 4T wins?
 ```{r}
 
 #This seems like it isn't working because solution is giving us numbers that are not 0 or 1. 
-prediction <- predict(logisticModel4T, testSubset)
+prediction <- predict(logisticModel4T, testSubset, type = "response")
+residuals <- residuals(logisticModel4T, testSubset, type = "deviance")
+confint(logisticModel4T)
+
+#classify based on probability
+p = ifelse(prediction >= 0.5, 1, 0)
+
+#combine prediction and passengerid's for submission
+res <- data.frame(p,testSubset$PassengerId)
+names(res) <- c("Survived", "PassengerId")
+
+res
+plot(residuals)
+
 solution <- data.frame(PassengerID = testSubset$PassengerId, Survived = prediction)
-write.csv(solution, file = 'rf_mod_Solution.csv', row.names = F)
+write.csv(res, file = 'glm_solution.csv', row.names = F)
 
 solution
 
