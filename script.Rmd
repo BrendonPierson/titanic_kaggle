@@ -1,5 +1,5 @@
 ---
-title: "Titanic Data"
+title: "Titanic Data linear regression"
 output: html_notebook
 ---
 
@@ -7,7 +7,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
-```{r}
+```{r, message = FALSE}
 library('e1071')
 library('dplyr') 
 library('rpart')
@@ -159,6 +159,10 @@ confint(logisticModel4T)
 
 #classify based on probability
 p = ifelse(prediction >= 0.5, 1, 0)
+
+#PUNT
+p[is.na(p)] <- 0
+
 
 #combine prediction and passengerid's for submission
 res <- data.frame(p,testSubset$PassengerId)

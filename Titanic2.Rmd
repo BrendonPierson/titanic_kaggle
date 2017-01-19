@@ -1,0 +1,85 @@
+---
+title: "Titanic 2"
+output: html_notebook
+---
+
+# Load the data and libraries
+```{r, message = FALSE}
+library('caret')
+library('dplyr')
+library('e1071')
+train <- read.csv('./input/train.csv', stringsAsFactors = F, na.strings="")
+test  <- read.csv('./input/test.csv', stringsAsFactors = F, na.strings="")
+```
+# Look at training Samples
+```{r}
+summary(train)
+```
+```{r}
+str(train)
+```
+```{r}
+colSums(is.na(train))
+```
+## Notes:
+  1. Survival rate in training set is 0.3838384 which is greater than the actual survival rate of 31.6.  May need to subsample for class imbalance.
+  2. There are 177 NA's in Age, as well as most of cabin, 2 embarked
+  3. With only 891 obs will likely use some sort of linear regression
+
+# Create new features
+### Title
+```{r}
+createNewFeatures <- function(data) {
+  trainMod <- data
+  trainMod$Title <- gsub('(.*, )|(\\..*)', '', data$Name)
+  
+  rare_title <- c('Dona', 'Lady', 'the Countess','Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer')
+  trainMod$Title[trainMod$Title == 'Mlle']        <- 'Miss'
+  trainMod$Title[trainMod$Title == 'Ms']          <- 'Miss'
+  trainMod$Title[trainMod$Title == 'Mme']         <- 'Mrs' 
+  trainMod$Title[trainMod$Title %in% rare_title]  <- 'Rare Title'
+  return(trainMod)
+}
+trainMod <- createNewFeatures(train)
+testMod <- createNewFeatures(test)
+```
+# Train
+```{r}
+factorize <- function(data) {
+  colsToFactor <- c("Pclass", "Sex", "Parch", "SibSp", "Title")
+  data[colsToFactor] <- lapply(data[colsToFactor], factor)
+  return(data)
+}
+
+trainMod <- factorize(trainMod)
+trainMod$Survived <- factor(trainMod$Survived)
+testMod <- factorize(testMod)
+
+preProcImp <- function(data) {
+  preProcValues <- preProcess(data, method="knnImpute")
+  trainModImp <- predict(preProcValues, data)
+  return(trainModImp)
+}
+
+trainModImp <- preProcImp(trainMod)
+testModImp <- preProcImp(testMod)
+
+fitControl <- trainControl(method = "repeatedcv",
+                           number = 10,
+                           repeats = 10)
+
+glmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
+                 method = "glm",
+                 trControl = fitControl)
+summary(glmModel)
+```
+# Predict
+```{r}
+prediction <- predict(glmModel, testModImp, type = "raw")
+
+solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
+
+solution
+write.csv(solution, file = 'glm_solution_2.csv', row.names = F)
+```
+
