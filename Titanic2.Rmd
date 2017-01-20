@@ -68,12 +68,32 @@ fitControl <- trainControl(method = "repeatedcv",
                            number = 10,
                            repeats = 10)
 
+
+fitControlGlmBoost <- trainControl(method = "repeatedcv",
+                           number = 10,
+                           classProbs = TRUE,
+                           summaryFunction = twoClassSummary,
+                           repeats = 10)
+
 glmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
                  method = "glm",
                  trControl = fitControl)
+
+gbmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
+                 method = "gbm",
+                 trControl = fitControl)
+str(trainModImp)
+drops = c("Name", "Ticket", "Cabin", "Embarked")
+glmBoostModel <- train(Survived ~ ., data = trainModImp[,-which(names(trainModImp) %in% drops)], 
+                 method = "glmboost", metric="ROC", tuneLength=5,
+                  family=Binomial(link = c("logit")),
+                 trControl = fitControlGlmBoost)
+
+summary(gbmModel)
 summary(glmModel)
+summary(glmBoostModel)
 ```
-# Predict
+# Predict glm
 ```{r}
 prediction <- predict(glmModel, testModImp, type = "raw")
 
@@ -81,5 +101,16 @@ solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
 
 solution
 write.csv(solution, file = 'glm_solution_2.csv', row.names = F)
+```
+
+# Predict gbm
+```{r}
+predictionGbm <- predict(gbmModel, testModImp, type = "raw")
+
+solutionGbm <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
+
+solution
+
+write.csv(solution, file = 'gbm_solution_1.csv', row.names = F)
 ```
 
