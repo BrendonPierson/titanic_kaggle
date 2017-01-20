@@ -38,6 +38,7 @@ createNewFeatures <- function(data) {
   trainMod$Title[trainMod$Title == 'Ms']          <- 'Miss'
   trainMod$Title[trainMod$Title == 'Mme']         <- 'Mrs' 
   trainMod$Title[trainMod$Title %in% rare_title]  <- 'Rare Title'
+  trainMod$Embarked[is.na(trainMod$Embarked)] <- "S"
   return(trainMod)
 }
 trainMod <- createNewFeatures(train)
@@ -46,14 +47,10 @@ testMod <- createNewFeatures(test)
 # Train
 ```{r}
 factorize <- function(data) {
-  colsToFactor <- c("Pclass", "Sex", "Parch", "SibSp", "Title")
+  colsToFactor <- c("Pclass", "Sex", "Parch", "SibSp", "Title", "Embarked")
   data[colsToFactor] <- lapply(data[colsToFactor], factor)
   return(data)
 }
-
-trainMod <- factorize(trainMod)
-trainMod$Survived <- factor(trainMod$Survived)
-testMod <- factorize(testMod)
 
 preProcImp <- function(data) {
   preProcValues <- preProcess(data, method="knnImpute")
@@ -61,13 +58,16 @@ preProcImp <- function(data) {
   return(trainModImp)
 }
 
+trainMod <- factorize(trainMod)
+trainMod$Survived <- factor(trainMod$Survived)
+testMod <- factorize(testMod)
+
 trainModImp <- preProcImp(trainMod)
 testModImp <- preProcImp(testMod)
-
+testModImp
 fitControl <- trainControl(method = "repeatedcv",
                            number = 10,
                            repeats = 10)
-
 
 fitControlGlmBoost <- trainControl(method = "repeatedcv",
                            number = 10,
@@ -75,23 +75,41 @@ fitControlGlmBoost <- trainControl(method = "repeatedcv",
                            summaryFunction = twoClassSummary,
                            repeats = 10)
 
-glmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
+glmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title + Embarked, data = trainModImp, 
                  method = "glm",
                  trControl = fitControl)
 
 gbmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
                  method = "gbm",
                  trControl = fitControl)
-str(trainModImp)
-drops = c("Name", "Ticket", "Cabin", "Embarked")
+
+
+glmBoostPreProc <- function(data) {
+  drops = c("Name", "Ticket", "Cabin", "Embarked", "PassengerId")
+  levels(data$Title) <- make.names(levels(data$Title))
+  return(data[, -which(names(data) %in% drops)])
+}
+
+glmBoostTest <- glmBoostPreProc(testModImp)
+
 glmBoostModel <- train(Survived ~ ., data = trainModImp[,-which(names(trainModImp) %in% drops)], 
                  method = "glmboost", metric="ROC", tuneLength=5,
-                  family=Binomial(link = c("logit")),
+                 # family=binomial,
+                 family=Binomial(link = c("logit")),
                  trControl = fitControlGlmBoost)
+
+rf_model<-train(Survived~., data = trainModImp[,-which(names(trainModImp) %in% drops)],method="rf",
+                trControl=trainControl(method="cv",number=5),
+                prox=TRUE,allowParallel=TRUE)
+
+make.names(levels(trainModImp$Survived))
+str(trainModImp[,-which(names(trainModImp) %in% drops)])
 
 summary(gbmModel)
 summary(glmModel)
 summary(glmBoostModel)
+plot(glmBoostModel)
+head(rf_model)
 ```
 # Predict glm
 ```{r}
@@ -100,7 +118,7 @@ prediction <- predict(glmModel, testModImp, type = "raw")
 solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
 
 solution
-write.csv(solution, file = 'glm_solution_2.csv', row.names = F)
+write.csv(solution, file = 'glm_solution_3.csv', row.names = F)
 ```
 
 # Predict gbm
@@ -112,5 +130,42 @@ solutionGbm <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
 solution
 
 write.csv(solution, file = 'gbm_solution_1.csv', row.names = F)
+```
+
+# Predict glmBoost
+```{r}
+glmBoostTest = glmBoostTest[ifelse(glmBoostTest$Parch == "7", "6", glmBoostTest$Parch) , ]
+str(glmBoostTest)
+predictionGlmBoostm <- predict(glmBoostModel, glmBoostTest)
+
+solutionGlmBoost <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
+
+solutionGlmBoost
+
+write.csv(solutionGlmBoost, file = 'glm_boost_1.csv', row.names = F)
+```
+
+
+# Predict rf
+```{r}
+#predictionGlmBoostm <- predict(rf_model, testModImp[,-which(names(testModImp) %in% drops)])
+testModImpRF = testModImp[ifelse(testModImp$Parch == "7", "6", testModImp$Parch) , ]
+predictionRF <- predict(rf_model, testModImpRF)
+solutionRF <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
+
+solutionRF
+
+write.csv(solutionRF, file = 'rf_2.csv', row.names = F)
+```
+
+
+# Predict with embarked
+```{r}
+prediction <- predict(glmModel, testModImp, type = "raw")
+
+solution <- data.frame(PassengerID = test$PassengerId, Survived = prediction)
+
+solution
+write.csv(solution, file = 'glm_solution_2.csv', row.names = F)
 ```
 
