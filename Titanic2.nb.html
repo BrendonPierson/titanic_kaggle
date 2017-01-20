@@ -190,19 +190,42 @@ test  &lt;- read.csv('./input/test.csv', stringsAsFactors = F, na.strings=&quot;
 <h1>Look at training Samples</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeSh0cmFpbilcblxuYGBgIn0= -->
-<pre class="r"><code>summary(train)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeSh0cmFpbilcbmBgYCJ9 -->
+<pre class="r"><code>summary(train)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICBQYXNzZW5nZXJJZCAgICAgICBTdXJ2aXZlZCAgICAgICAgICBQY2xhc3MgICAgICAgICAgTmFtZSAgICAgICAgICAgICAgIFNleCAgICAgICAgICAgICAgICAgQWdlICAgICAgICAgICAgU2liU3AgICAgICAgICAgIFBhcmNoICAgICAgICAgICBUaWNrZXQgICAgICAgICAgICAgICBGYXJlICAgICAgIFxuIE1pbi4gICA6ICAxLjAgICBNaW4uICAgOjAuMDAwMCAgIE1pbi4gICA6MS4wMDAgICBMZW5ndGg6ODkxICAgICAgICAgTGVuZ3RoOjg5MSAgICAgICAgIE1pbi4gICA6IDAuNDIgICBNaW4uICAgOjAuMDAwICAgTWluLiAgIDowLjAwMDAgICBMZW5ndGg6ODkxICAgICAgICAgTWluLiAgIDogIDAuMDAgIFxuIDFzdCBRdS46MjIzLjUgICAxc3QgUXUuOjAuMDAwMCAgIDFzdCBRdS46Mi4wMDAgICBDbGFzcyA6Y2hhcmFjdGVyICAgQ2xhc3MgOmNoYXJhY3RlciAgIDFzdCBRdS46MjAuMTIgICAxc3QgUXUuOjAuMDAwICAgMXN0IFF1LjowLjAwMDAgICBDbGFzcyA6Y2hhcmFjdGVyICAgMXN0IFF1LjogIDcuOTEgIFxuIE1lZGlhbiA6NDQ2LjAgICBNZWRpYW4gOjAuMDAwMCAgIE1lZGlhbiA6My4wMDAgICBNb2RlICA6Y2hhcmFjdGVyICAgTW9kZSAgOmNoYXJhY3RlciAgIE1lZGlhbiA6MjguMDAgICBNZWRpYW4gOjAuMDAwICAgTWVkaWFuIDowLjAwMDAgICBNb2RlICA6Y2hhcmFjdGVyICAgTWVkaWFuIDogMTQuNDUgIFxuIE1lYW4gICA6NDQ2LjAgICBNZWFuICAgOjAuMzgzOCAgIE1lYW4gICA6Mi4zMDkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1lYW4gICA6MjkuNzAgICBNZWFuICAgOjAuNTIzICAgTWVhbiAgIDowLjM4MTYgICAgICAgICAgICAgICAgICAgICAgTWVhbiAgIDogMzIuMjAgIFxuIDNyZCBRdS46NjY4LjUgICAzcmQgUXUuOjEuMDAwMCAgIDNyZCBRdS46My4wMDAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDNyZCBRdS46MzguMDAgICAzcmQgUXUuOjEuMDAwICAgM3JkIFF1LjowLjAwMDAgICAgICAgICAgICAgICAgICAgICAgM3JkIFF1LjogMzEuMDAgIFxuIE1heC4gICA6ODkxLjAgICBNYXguICAgOjEuMDAwMCAgIE1heC4gICA6My4wMDAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1heC4gICA6ODAuMDAgICBNYXguICAgOjguMDAwICAgTWF4LiAgIDo2LjAwMDAgICAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDo1MTIuMzMgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5BJ3MgICA6MTc3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgIENhYmluICAgICAgICAgICAgIEVtYmFya2VkICAgICAgICBcbiBMZW5ndGg6ODkxICAgICAgICAgTGVuZ3RoOjg5MSAgICAgICAgXG4gQ2xhc3MgOmNoYXJhY3RlciAgIENsYXNzIDpjaGFyYWN0ZXIgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNb2RlICA6Y2hhcmFjdGVyICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
-<pre><code>  PassengerId       Survived          Pclass          Name               Sex                 Age            SibSp           Parch           Ticket               Fare       
- Min.   :  1.0   Min.   :0.0000   Min.   :1.000   Length:891         Length:891         Min.   : 0.42   Min.   :0.000   Min.   :0.0000   Length:891         Min.   :  0.00  
- 1st Qu.:223.5   1st Qu.:0.0000   1st Qu.:2.000   Class :character   Class :character   1st Qu.:20.12   1st Qu.:0.000   1st Qu.:0.0000   Class :character   1st Qu.:  7.91  
- Median :446.0   Median :0.0000   Median :3.000   Mode  :character   Mode  :character   Median :28.00   Median :0.000   Median :0.0000   Mode  :character   Median : 14.45  
- Mean   :446.0   Mean   :0.3838   Mean   :2.309                                         Mean   :29.70   Mean   :0.523   Mean   :0.3816                      Mean   : 32.20  
- 3rd Qu.:668.5   3rd Qu.:1.0000   3rd Qu.:3.000                                         3rd Qu.:38.00   3rd Qu.:1.000   3rd Qu.:0.0000                      3rd Qu.: 31.00  
- Max.   :891.0   Max.   :1.0000   Max.   :3.000                                         Max.   :80.00   Max.   :8.000   Max.   :6.0000                      Max.   :512.33  
-                                                                                        NA's   :177                                                                         
+<!-- rnb-output-begin eyJkYXRhIjoiICBQYXNzZW5nZXJJZCAgICAgICBTdXJ2aXZlZCAgICAgICAgICBQY2xhc3MgICAgIFxuIE1pbi4gICA6ICAxLjAgICBNaW4uICAgOjAuMDAwMCAgIE1pbi4gICA6MS4wMDAgIFxuIDFzdCBRdS46MjIzLjUgICAxc3QgUXUuOjAuMDAwMCAgIDFzdCBRdS46Mi4wMDAgIFxuIE1lZGlhbiA6NDQ2LjAgICBNZWRpYW4gOjAuMDAwMCAgIE1lZGlhbiA6My4wMDAgIFxuIE1lYW4gICA6NDQ2LjAgICBNZWFuICAgOjAuMzgzOCAgIE1lYW4gICA6Mi4zMDkgIFxuIDNyZCBRdS46NjY4LjUgICAzcmQgUXUuOjEuMDAwMCAgIDNyZCBRdS46My4wMDAgIFxuIE1heC4gICA6ODkxLjAgICBNYXguICAgOjEuMDAwMCAgIE1heC4gICA6My4wMDAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICBOYW1lICAgICAgICAgICAgICAgU2V4ICAgICAgICAgICBcbiBMZW5ndGg6ODkxICAgICAgICAgTGVuZ3RoOjg5MSAgICAgICAgXG4gQ2xhc3MgOmNoYXJhY3RlciAgIENsYXNzIDpjaGFyYWN0ZXIgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNb2RlICA6Y2hhcmFjdGVyICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICBBZ2UgICAgICAgICAgICBTaWJTcCAgICAgICAgICAgUGFyY2ggICAgICAgXG4gTWluLiAgIDogMC40MiAgIE1pbi4gICA6MC4wMDAgICBNaW4uICAgOjAuMDAwMCAgXG4gMXN0IFF1LjoyMC4xMiAgIDFzdCBRdS46MC4wMDAgICAxc3QgUXUuOjAuMDAwMCAgXG4gTWVkaWFuIDoyOC4wMCAgIE1lZGlhbiA6MC4wMDAgICBNZWRpYW4gOjAuMDAwMCAgXG4gTWVhbiAgIDoyOS43MCAgIE1lYW4gICA6MC41MjMgICBNZWFuICAgOjAuMzgxNiAgXG4gM3JkIFF1LjozOC4wMCAgIDNyZCBRdS46MS4wMDAgICAzcmQgUXUuOjAuMDAwMCAgXG4gTWF4LiAgIDo4MC4wMCAgIE1heC4gICA6OC4wMDAgICBNYXguICAgOjYuMDAwMCAgXG4gTkEncyAgIDoxNzcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgVGlja2V0ICAgICAgICAgICAgICAgRmFyZSAgICAgICBcbiBMZW5ndGg6ODkxICAgICAgICAgTWluLiAgIDogIDAuMDAgIFxuIENsYXNzIDpjaGFyYWN0ZXIgICAxc3QgUXUuOiAgNy45MSAgXG4gTW9kZSAgOmNoYXJhY3RlciAgIE1lZGlhbiA6IDE0LjQ1ICBcbiAgICAgICAgICAgICAgICAgICAgTWVhbiAgIDogMzIuMjAgIFxuICAgICAgICAgICAgICAgICAgICAzcmQgUXUuOiAzMS4wMCAgXG4gICAgICAgICAgICAgICAgICAgIE1heC4gICA6NTEyLjMzICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgIENhYmluICAgICAgICAgICAgIEVtYmFya2VkICAgICAgICBcbiBMZW5ndGg6ODkxICAgICAgICAgTGVuZ3RoOjg5MSAgICAgICAgXG4gQ2xhc3MgOmNoYXJhY3RlciAgIENsYXNzIDpjaGFyYWN0ZXIgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNb2RlICA6Y2hhcmFjdGVyICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
+<pre><code>  PassengerId       Survived          Pclass     
+ Min.   :  1.0   Min.   :0.0000   Min.   :1.000  
+ 1st Qu.:223.5   1st Qu.:0.0000   1st Qu.:2.000  
+ Median :446.0   Median :0.0000   Median :3.000  
+ Mean   :446.0   Mean   :0.3838   Mean   :2.309  
+ 3rd Qu.:668.5   3rd Qu.:1.0000   3rd Qu.:3.000  
+ Max.   :891.0   Max.   :1.0000   Max.   :3.000  
+                                                 
+     Name               Sex           
+ Length:891         Length:891        
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+                                      
+                                      
+                                      
+                                      
+      Age            SibSp           Parch       
+ Min.   : 0.42   Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:20.12   1st Qu.:0.000   1st Qu.:0.0000  
+ Median :28.00   Median :0.000   Median :0.0000  
+ Mean   :29.70   Mean   :0.523   Mean   :0.3816  
+ 3rd Qu.:38.00   3rd Qu.:1.000   3rd Qu.:0.0000  
+ Max.   :80.00   Max.   :8.000   Max.   :6.0000  
+ NA's   :177                                     
+    Ticket               Fare       
+ Length:891         Min.   :  0.00  
+ Class :character   1st Qu.:  7.91  
+ Mode  :character   Median : 14.45  
+                    Mean   : 32.20  
+                    3rd Qu.: 31.00  
+                    Max.   :512.33  
+                                    
     Cabin             Embarked        
  Length:891         Length:891        
  Class :character   Class :character  
@@ -214,9 +237,8 @@ test  &lt;- read.csv('./input/test.csv', stringsAsFactors = F, na.strings=&quot;
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKHRyYWluKVxuXG5gYGAifQ== -->
-<pre class="r"><code>str(train)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyKHRyYWluKVxuYGBgIn0= -->
+<pre class="r"><code>str(train)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiJ2RhdGEuZnJhbWUnOlx0ODkxIG9icy4gb2YgIDEyIHZhcmlhYmxlczpcbiAkIFBhc3NlbmdlcklkOiBpbnQgIDEgMiAzIDQgNSA2IDcgOCA5IDEwIC4uLlxuICQgU3Vydml2ZWQgICA6IGludCAgMCAxIDEgMSAwIDAgMCAwIDEgMSAuLi5cbiAkIFBjbGFzcyAgICAgOiBpbnQgIDMgMSAzIDEgMyAzIDEgMyAzIDIgLi4uXG4gJCBOYW1lICAgICAgIDogY2hyICBcIkJyYXVuZCwgTXIuIE93ZW4gSGFycmlzXCIgXCJDdW1pbmdzLCBNcnMuIEpvaG4gQnJhZGxleSAoRmxvcmVuY2UgQnJpZ2dzIFRoYXllcilcIiBcIkhlaWtraW5lbiwgTWlzcy4gTGFpbmFcIiBcIkZ1dHJlbGxlLCBNcnMuIEphY3F1ZXMgSGVhdGggKExpbHkgTWF5IFBlZWwpXCIgLi4uXG4gJCBTZXggICAgICAgIDogY2hyICBcIm1hbGVcIiBcImZlbWFsZVwiIFwiZmVtYWxlXCIgXCJmZW1hbGVcIiAuLi5cbiAkIEFnZSAgICAgICAgOiBudW0gIDIyIDM4IDI2IDM1IDM1IE5BIDU0IDIgMjcgMTQgLi4uXG4gJCBTaWJTcCAgICAgIDogaW50ICAxIDEgMCAxIDAgMCAwIDMgMCAxIC4uLlxuICQgUGFyY2ggICAgICA6IGludCAgMCAwIDAgMCAwIDAgMCAxIDIgMCAuLi5cbiAkIFRpY2tldCAgICAgOiBjaHIgIFwiQS81IDIxMTcxXCIgXCJQQyAxNzU5OVwiIFwiU1RPTi9PMi4gMzEwMTI4MlwiIFwiMTEzODAzXCIgLi4uXG4gJCBGYXJlICAgICAgIDogbnVtICA3LjI1IDcxLjI4IDcuOTIgNTMuMSA4LjA1IC4uLlxuICQgQ2FiaW4gICAgICA6IGNociAgTkEgXCJDODVcIiBOQSBcIkMxMjNcIiAuLi5cbiAkIEVtYmFya2VkICAgOiBjaHIgIFwiU1wiIFwiQ1wiIFwiU1wiIFwiU1wiIC4uLlxuIn0= -->
 <pre><code>'data.frame':   891 obs. of  12 variables:
@@ -235,13 +257,16 @@ test  &lt;- read.csv('./input/test.csv', stringsAsFactors = F, na.strings=&quot;
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29sU3Vtcyhpcy5uYSh0cmFpbikpXG5cbmBgYCJ9 -->
-<pre class="r"><code>colSums(is.na(train))
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29sU3Vtcyhpcy5uYSh0cmFpbikpXG5gYGAifQ== -->
+<pre class="r"><code>colSums(is.na(train))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUGFzc2VuZ2VySWQgICAgU3Vydml2ZWQgICAgICBQY2xhc3MgICAgICAgIE5hbWUgICAgICAgICBTZXggICAgICAgICBBZ2UgICAgICAgU2liU3AgICAgICAgUGFyY2ggICAgICBUaWNrZXQgICAgICAgIEZhcmUgICAgICAgQ2FiaW4gICAgRW1iYXJrZWQgXG4gICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgIDE3NyAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgIDY4NyAgICAgICAgICAgMiBcbiJ9 -->
-<pre><code>PassengerId    Survived      Pclass        Name         Sex         Age       SibSp       Parch      Ticket        Fare       Cabin    Embarked 
-          0           0           0           0           0         177           0           0           0           0         687           2 </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiUGFzc2VuZ2VySWQgICAgU3Vydml2ZWQgICAgICBQY2xhc3MgICAgICAgIE5hbWUgXG4gICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCAgICAgICAgICAgMCBcbiAgICAgICAgU2V4ICAgICAgICAgQWdlICAgICAgIFNpYlNwICAgICAgIFBhcmNoIFxuICAgICAgICAgIDAgICAgICAgICAxNzcgICAgICAgICAgIDAgICAgICAgICAgIDAgXG4gICAgIFRpY2tldCAgICAgICAgRmFyZSAgICAgICBDYWJpbiAgICBFbWJhcmtlZCBcbiAgICAgICAgICAwICAgICAgICAgICAwICAgICAgICAgNjg3ICAgICAgICAgICAyIFxuIn0= -->
+<pre><code>PassengerId    Survived      Pclass        Name 
+          0           0           0           0 
+        Sex         Age       SibSp       Parch 
+          0         177           0           0 
+     Ticket        Fare       Cabin    Embarked 
+          0           0         687           2 </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -283,109 +308,24 @@ testMod &lt;- createNewFeatures(test)</code></pre>
 <h1>Train</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xtQm9vc3RNb2RlbCA8LSB0cmFpbihTdXJ2aXZlZCB+IC4sIGRhdGEgPSB0cmFpbk1vZEltcFssLXdoaWNoKG5hbWVzKHRyYWluTW9kSW1wKSAlaW4lIGRyb3BzKV0sIFxuICAgICAgICAgICAgICAgICBtZXRob2QgPSBcImdsbWJvb3N0XCIsIG1ldHJpYz1cIlJPQ1wiLCB0dW5lTGVuZ3RoPTUsXG4gICAgICAgICAgICAgICAgICBmYW1pbHk9Qmlub21pYWwobGluayA9IGMoXCJsb2dpdFwiKSksXG4gICAgICAgICAgICAgICAgIHRyQ29udHJvbCA9IGZpdENvbnRyb2wpXG5cbmBgYCJ9 -->
-<pre class="r"><code>glmBoostModel &lt;- train(Survived ~ ., data = trainModImp[,-which(names(trainModImp) %in% drops)], 
-                 method = &quot;glmboost&quot;, metric=&quot;ROC&quot;, tuneLength=5,
-                  family=Binomial(link = c(&quot;logit&quot;)),
-                 trControl = fitControl)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmFjdG9yaXplIDwtIGZ1bmN0aW9uKGRhdGEpIHtcbiAgY29sc1RvRmFjdG9yIDwtIGMoXCJQY2xhc3NcIiwgXCJTZXhcIiwgXCJQYXJjaFwiLCBcIlNpYlNwXCIsIFwiVGl0bGVcIilcbiAgZGF0YVtjb2xzVG9GYWN0b3JdIDwtIGxhcHBseShkYXRhW2NvbHNUb0ZhY3Rvcl0sIGZhY3RvcilcbiAgcmV0dXJuKGRhdGEpXG59XG50cmFpbk1vZCA8LSBmYWN0b3JpemUodHJhaW5Nb2QpXG50cmFpbk1vZCRTdXJ2aXZlZCA8LSBmYWN0b3IodHJhaW5Nb2QkU3Vydml2ZWQpXG50ZXN0TW9kIDwtIGZhY3Rvcml6ZSh0ZXN0TW9kKVxucHJlUHJvY0ltcCA8LSBmdW5jdGlvbihkYXRhKSB7XG4gIHByZVByb2NWYWx1ZXMgPC0gcHJlUHJvY2VzcyhkYXRhLCBtZXRob2Q9XCJrbm5JbXB1dGVcIilcbiAgdHJhaW5Nb2RJbXAgPC0gcHJlZGljdChwcmVQcm9jVmFsdWVzLCBkYXRhKVxuICByZXR1cm4odHJhaW5Nb2RJbXApXG59XG50cmFpbk1vZEltcCA8LSBwcmVQcm9jSW1wKHRyYWluTW9kKVxuYGBgIn0= -->
+<pre class="r"><code>factorize &lt;- function(data) {
+  colsToFactor &lt;- c(&quot;Pclass&quot;, &quot;Sex&quot;, &quot;Parch&quot;, &quot;SibSp&quot;, &quot;Title&quot;)
+  data[colsToFactor] &lt;- lapply(data[colsToFactor], factor)
+  return(data)
+}
+trainMod &lt;- factorize(trainMod)
+trainMod$Survived &lt;- factor(trainMod$Survived)
+testMod &lt;- factorize(testMod)
+preProcImp &lt;- function(data) {
+  preProcValues &lt;- preProcess(data, method=&quot;knnImpute&quot;)
+  trainModImp &lt;- predict(preProcValues, data)
+  return(trainModImp)
+}
+trainModImp &lt;- preProcImp(trainMod)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiMSBwYWNrYWdlIGlzIG5lZWRlZCBmb3IgdGhpcyBtb2RlbCBhbmQgaXMgbm90IGluc3RhbGxlZC4gKG1ib29zdCkuIFdvdWxkIHlvdSBsaWtlIHRvIHRyeSB0byBpbnN0YWxsIGl0IG5vdz9cbjE6IHllc1xuMjogbm9cbiJ9 -->
-<pre><code>1 package is needed for this model and is not installed. (mboost). Would you like to try to install it now?
-1: yes
-2: no</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueWVzXG5gYGAifQ== -->
-<pre class="r"><code>yes</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiYWxzbyBpbnN0YWxsaW5nIHRoZSBkZXBlbmRlbmNpZXMg4oCYVEguZGF0YeKAmSwg4oCYbXVsdGNvbXDigJksIOKAmG12dG5vcm3igJksIOKAmG1vZGVsdG9vbHPigJksIOKAmHN0cnVjY2hhbmdl4oCZLCDigJhjb2lu4oCZLCDigJh6b2/igJksIOKAmHNhbmR3aWNo4oCZLCDigJhzdGFic+KAmSwg4oCYbm5sc+KAmSwg4oCYcXVhZHByb2figJksIOKAmHBhcnR54oCZXG5cbnRyeWluZyBVUkwgJ2h0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9iaW4vbWFjb3N4L21hdmVyaWNrcy9jb250cmliLzMuMy9USC5kYXRhXzEuMC03LnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggNTIwMTYzNiBieXRlcyAoNS4wIE1CKVxuPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbmRvd25sb2FkZWQgNS4wIE1CXG5cbnRyeWluZyBVUkwgJ2h0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9iaW4vbWFjb3N4L21hdmVyaWNrcy9jb250cmliLzMuMy9tdWx0Y29tcF8xLjQtNi50Z3onXG5Db250ZW50IHR5cGUgJ2FwcGxpY2F0aW9uL3gtZ3ppcCcgbGVuZ3RoIDYyNTMyMiBieXRlcyAoNjEwIEtCKVxuPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbmRvd25sb2FkZWQgNjEwIEtCXG5cbnRyeWluZyBVUkwgJ2h0dHBzOi8vY3Jhbi5yc3R1ZGlvLmNvbS9iaW4vbWFjb3N4L21hdmVyaWNrcy9jb250cmliLzMuMy9tdnRub3JtXzEuMC01LnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggMjIyNTY2IGJ5dGVzICgyMTcgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAyMTcgS0JcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvbWF2ZXJpY2tzL2NvbnRyaWIvMy4zL21vZGVsdG9vbHNfMC4yLTIxLnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggMTI2MDc5IGJ5dGVzICgxMjMgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAxMjMgS0JcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvbWF2ZXJpY2tzL2NvbnRyaWIvMy4zL3N0cnVjY2hhbmdlXzEuNS0xLnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggNzg5OTYzIGJ5dGVzICg3NzEgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCA3NzEgS0JcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvbWF2ZXJpY2tzL2NvbnRyaWIvMy4zL2NvaW5fMS4xLTMudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAxMzkwODExIGJ5dGVzICgxLjMgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAxLjMgTUJcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvbWF2ZXJpY2tzL2NvbnRyaWIvMy4zL3pvb18xLjctMTQudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA4OTExODMgYnl0ZXMgKDg3MCBLQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDg3MCBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9tYXZlcmlja3MvY29udHJpYi8zLjMvc2FuZHdpY2hfMi4zLTQudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA1MDU5OTUgYnl0ZXMgKDQ5NCBLQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDQ5NCBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9tYXZlcmlja3MvY29udHJpYi8zLjMvc3RhYnNfMC41LTEudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA2ODY1OCBieXRlcyAoNjcgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCA2NyBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9tYXZlcmlja3MvY29udHJpYi8zLjMvbm5sc18xLjQudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAzNTk0MCBieXRlcyAoMzUgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAzNSBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9tYXZlcmlja3MvY29udHJpYi8zLjMvcXVhZHByb2dfMS41LTUudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAzNzM5MyBieXRlcyAoMzYgS0IpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAzNiBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9tYXZlcmlja3MvY29udHJpYi8zLjMvcGFydHlfMS4xLTIudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA3MDU0MjMgYnl0ZXMgKDY4OCBLQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDY4OCBLQlxuXG50cnlpbmcgVVJMICdodHRwczovL2NyYW4ucnN0dWRpby5jb20vYmluL21hY29zeC9tYXZlcmlja3MvY29udHJpYi8zLjMvbWJvb3N0XzIuNy0wLnRneidcbkNvbnRlbnQgdHlwZSAnYXBwbGljYXRpb24veC1nemlwJyBsZW5ndGggMjEzNTA0MSBieXRlcyAoMi4wIE1CKVxuPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT1cbmRvd25sb2FkZWQgMi4wIE1CXG4ifQ== -->
-<pre><code>also installing the dependencies ‘TH.data’, ‘multcomp’, ‘mvtnorm’, ‘modeltools’, ‘strucchange’, ‘coin’, ‘zoo’, ‘sandwich’, ‘stabs’, ‘nnls’, ‘quadprog’, ‘party’
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/TH.data_1.0-7.tgz'
-Content type 'application/x-gzip' length 5201636 bytes (5.0 MB)
-==================================================
-downloaded 5.0 MB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/multcomp_1.4-6.tgz'
-Content type 'application/x-gzip' length 625322 bytes (610 KB)
-==================================================
-downloaded 610 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/mvtnorm_1.0-5.tgz'
-Content type 'application/x-gzip' length 222566 bytes (217 KB)
-==================================================
-downloaded 217 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/modeltools_0.2-21.tgz'
-Content type 'application/x-gzip' length 126079 bytes (123 KB)
-==================================================
-downloaded 123 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/strucchange_1.5-1.tgz'
-Content type 'application/x-gzip' length 789963 bytes (771 KB)
-==================================================
-downloaded 771 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/coin_1.1-3.tgz'
-Content type 'application/x-gzip' length 1390811 bytes (1.3 MB)
-==================================================
-downloaded 1.3 MB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/zoo_1.7-14.tgz'
-Content type 'application/x-gzip' length 891183 bytes (870 KB)
-==================================================
-downloaded 870 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/sandwich_2.3-4.tgz'
-Content type 'application/x-gzip' length 505995 bytes (494 KB)
-==================================================
-downloaded 494 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/stabs_0.5-1.tgz'
-Content type 'application/x-gzip' length 68658 bytes (67 KB)
-==================================================
-downloaded 67 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/nnls_1.4.tgz'
-Content type 'application/x-gzip' length 35940 bytes (35 KB)
-==================================================
-downloaded 35 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/quadprog_1.5-5.tgz'
-Content type 'application/x-gzip' length 37393 bytes (36 KB)
-==================================================
-downloaded 36 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/party_1.1-2.tgz'
-Content type 'application/x-gzip' length 705423 bytes (688 KB)
-==================================================
-downloaded 688 KB
-
-trying URL 'https://cran.rstudio.com/bin/macosx/mavericks/contrib/3.3/mboost_2.7-0.tgz'
-Content type 'application/x-gzip' length 2135041 bytes (2.0 MB)
-==================================================
-downloaded 2.0 MB</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5UaGUgZG93bmxvYWRlZCBiaW5hcnkgcGFja2FnZXMgYXJlIGluXG5cdC92YXIvZm9sZGVycy85ai9ua2txcXJmeDQ4ZDZ3NzEwYjZua2t4bmgwMDAwZ24vVC8vUnRtcE9ndWhsVi9kb3dubG9hZGVkX3BhY2thZ2VzXG4ifQ== -->
-<pre><code>
-The downloaded binary packages are in
-    /var/folders/9j/nkkqqrfx48d6w710b6nkkxnh0000gn/T//RtmpOguhlV/downloaded_packages</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBtYm9vc3RcbkxvYWRpbmcgcmVxdWlyZWQgcGFja2FnZTogc3RhYnNcblRoaXMgaXMgbWJvb3N0IDIuNy0wLiBTZWUg4oCYcGFja2FnZT9tYm9vc3TigJkgYW5kIOKAmG5ld3MocGFja2FnZSAgPSBcIm1ib29zdFwiKeKAmVxuZm9yIGEgY29tcGxldGUgbGlzdCBvZiBjaGFuZ2VzLlxuXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhtYm9vc3TigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTpnZ3Bsb3Qy4oCZOlxuXG4gICAgJSslXG5cbkVycm9yIGluIHRyYWluLmRlZmF1bHQoeCwgeSwgd2VpZ2h0cyA9IHcsIC4uLikgOiBcbiAgQ2xhc3MgcHJvYmFiaWxpdGllcyBhcmUgbmVlZGVkIHRvIHNjb3JlIG1vZGVscyB1c2luZyB0aGUgYXJlYSB1bmRlciB0aGUgUk9DIGN1cnZlLiBTZXQgYGNsYXNzUHJvYnMgPSBUUlVFYCBpbiB0aGUgdHJhaW5Db250cm9sKCkgZnVuY3Rpb24uXG4ifQ== -->
-<pre><code>Loading required package: mboost
-Loading required package: stabs
-This is mboost 2.7-0. See ‘package?mboost’ and ‘news(package  = &quot;mboost&quot;)’
-for a complete list of changes.
-
-
-Attaching package: ‘mboost’
-
-The following object is masked from ‘package:ggplot2’:
-
-    %+%
-
-Error in train.default(x, y, weights = w, ...) : 
-  Class probabilities are needed to score models using the area under the ROC curve. Set `classProbs = TRUE` in the trainControl() function.</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcmVxdWlyZU5hbWVzcGFjZVF1aWV0U3RvcChcIlJBTk5cIikgOiBwYWNrYWdlIFJBTk4gaXMgcmVxdWlyZWRcbiJ9 -->
+<pre><code>Error in requireNamespaceQuietStop(&quot;RANN&quot;) : package RANN is required</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -394,13 +334,6 @@ Error in train.default(x, y, weights = w, ...) :
 <h1>Predict glm</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6NDE4fSwicmRmIjoiSDRzSUFBQUFBQUFBQTYzWEIzaWNkUUhIOFV2eSs3YzB0VU5SUUFWRVVjRFIyTlpWa0NGWVJSU3h0b3BWRkUyVGF4dWJKaVZOV2hsQ2xTVTRFU2NLRHR3ZzRCWUhDQTRjTFBlV0lhQ0M0R0FxV1B4Y211TjVlazl5dVFKOW5rOXo5OTcvZmU5OS8rLy9tOHN0WHJoMGZ1ZlN6a3FsMGw3cDZHaXZ0SGQ0bUhiL3RWVlNtVmI3K1laS3BXUHIwUUdWeWd6UFArNzVVYnlSb3ptR0RieUpOM01zeDNFOEozQWliK0VrVHVhdHZJMjM4dzdleWJzNGhYZHpLdS9odmJ5UDkvTUJQc2hwZklnUGN6cG44QkUreXNlb25kdVpmSUpQOGlrK3pXZjRMSi9qTE03bTg1ekR1WnpIRi9naVgrTExmSVd2OGpXK3p2bDhnMi95TGI3TkJWeklkN2lJaS9rdTMrUDcvSUJMK0NFLzRzZjhoRXU1ak11NWdpdjVLVC9qNS95Q1gvSXJmczF2K0MyLzQvZjhnVC95SjY3aWFxN2hXdjdNZFZ6UERmeUZ2L0kzYnVRbS9zN04zTUkvK0NmLzR0L2N5bTNjemgzY3lWMzhoLzl5Ti9md1B6Wnlyd1ZUV3pSdG14Wk9yS0RZa01JVXBySVZGbE1zdEV6bklWaExtY2tzWnZOUUhvYTFsb2Z6Q0xaaFc3YmprVHlLUjdNOU83QWpqMkVuSHN2ajJKbkg4d1IyWVZkMjQ0azhpU2Z6Rk9iUXhWT1p5enptOHpTZXpqTjRKczlpQWJ1ekI4OW1UL1ppYi9iaE9lekxmanlYaFR5UDU3TS9MK0FBWHNpTE9KQVhjeEF2WVJFdlpURkxlQmt2NTJCZXdWSmV5YXM0aEZmekdnN2x0YnlPYnBiUlF5OVZsck9DbGZUeGVsYlJ6Mm9HR0dRTmh6SEVXb1laWVIzcjhUc2doM01FUjZMLzZELzZqLzZqLytnLytvLytvLy9vUC9xUC9xUC82RC82ai82ai8rZy8rby8rby8vb1AvcVAvcVAvNkQvNmovNmovK2cvK28vK28vL29QL3FQL3FQLzZELzZqLzZqLytnLytvLytvLy9vUC9xUC9xUC82RC82ai82ai8rZy8rby8rby8vb1AvcVAvcVAvNkQvNmovNmovK2cvK28vK28vL29QL3FQL3FQLzZELzZqLzZqLytnLytvLytvLy9vUC9xUC9xUC82RC82ai82ai8rZy8rby8rby8vb1AvcVAvcVAvNkQvNmovNmovK2cvK28vK28vL29QL3FQL3FQLzZELzZqLzZqLytnLytvLytvLy9vUC9xUC9xUC82RC82ai82ai8rZy8rby8rby8vb1AvcVAvcVZlS2ZvditpLzZML292TmhiOUYvMFgvUmY5Ri8wWC9SZjlGLzBYL1JmOUYvMFgvUmY5Ri8wWC9SZjlGLzBYL1JmOUYvMFgvUmY5Ri8wWC9YZU1mUjc1c05yMCtkVFc4TGp4NTNpdk4rN1grRnJqdHJaeE5Edk9aR1B2ei83ajdUdlp0YlN5YmFKem5Xd2VXcDN2VnQ2ajJUMXFkbzliZWIveDltOW1vdkdUclpObTQ1dXRoMlp6ME1wMVRUUm5EM1FPSnpxUHllN1JnM0h2eDd1R1Z1NVhzM2x2Tm02aThST2RheXRycjVYemJxV2hWdVpnc21Oc1NTUE4xczlFdjhlYXJaM0pIay9VVGF2dE5MdHZXM3FPcmR6L2htTnM5c1ZwU245MVhiWGZYMU9WMmFPdmpuMmRtbHQvTUs5aGZPbnA3MTViSDM3ZlFaWjM5d3dQRG5tMHNYSDRRUGZxYXVQUnB5OXlpT3JBaXVyUUFRdkhObTIxWkdSb1hkKzZhbS9EL3RPR0J0ZDMxWTh4bzNhTURaWGF2OXJuYVcxZzdlLzZ6VTZsczdkN3VMdHIrWkJkeGptZHFZTnJodnNHQnh5c3ZmWmxzVFRzM0RiVXNHSFd5RUR0elh2bjlLd2NHVmcxWjBIdERjWW1zakoyUW0yYlRxYit1RDdCcVo5WXFjK1JDKzRicU5ibnBiOTdXYlYvN01sTUZ6bDZqVjFyaHZvR2h1dFhZdXZhcnVIQjRlNzZ1TTZld2Y3Nmx0RnJxMno4UDVVM3AyOGFEd0FBIn0= -->
-<div data-pagedtable>
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["PassengerID"],"name":[1],"type":["int"],"align":["left"]},{"label":["Survived"],"name":[2],"type":["fctr"],"align":["left"]}],"data":[{"1":"892","2":"0"},{"1":"893","2":"1"},{"1":"894","2":"0"},{"1":"895","2":"0"},{"1":"896","2":"1"},{"1":"897","2":"0"},{"1":"898","2":"1"},{"1":"899","2":"0"},{"1":"900","2":"1"},{"1":"901","2":"0"},{"1":"902","2":"0"},{"1":"903","2":"0"},{"1":"904","2":"1"},{"1":"905","2":"0"},{"1":"906","2":"1"},{"1":"907","2":"1"},{"1":"908","2":"0"},{"1":"909","2":"0"},{"1":"910","2":"1"},{"1":"911","2":"1"},{"1":"912","2":"0"},{"1":"913","2":"1"},{"1":"914","2":"1"},{"1":"915","2":"1"},{"1":"916","2":"1"},{"1":"917","2":"0"},{"1":"918","2":"1"},{"1":"919","2":"0"},{"1":"920","2":"0"},{"1":"921","2":"0"},{"1":"922","2":"0"},{"1":"923","2":"0"},{"1":"924","2":"1"},{"1":"925","2":"1"},{"1":"926","2":"0"},{"1":"927","2":"0"},{"1":"928","2":"1"},{"1":"929","2":"1"},{"1":"930","2":"0"},{"1":"931","2":"0"},{"1":"932","2":"0"},{"1":"933","2":"0"},{"1":"934","2":"0"},{"1":"935","2":"1"},{"1":"936","2":"1"},{"1":"937","2":"0"},{"1":"938","2":"0"},{"1":"939","2":"0"},{"1":"940","2":"1"},{"1":"941","2":"1"},{"1":"942","2":"0"},{"1":"943","2":"0"},{"1":"944","2":"1"},{"1":"945","2":"1"},{"1":"946","2":"0"},{"1":"947","2":"0"},{"1":"948","2":"0"},{"1":"949","2":"0"},{"1":"950","2":"0"},{"1":"951","2":"1"},{"1":"952","2":"0"},{"1":"953","2":"0"},{"1":"954","2":"0"},{"1":"955","2":"1"},{"1":"956","2":"1"},{"1":"957","2":"1"},{"1":"958","2":"1"},{"1":"959","2":"0"},{"1":"960","2":"0"},{"1":"961","2":"1"},{"1":"962","2":"1"},{"1":"963","2":"0"},{"1":"964","2":"1"},{"1":"965","2":"0"},{"1":"966","2":"1"},{"1":"967","2":"1"},{"1":"968","2":"0"},{"1":"969","2":"1"},{"1":"970","2":"0"},{"1":"971","2":"1"},{"1":"972","2":"1"},{"1":"973","2":"0"},{"1":"974","2":"0"},{"1":"975","2":"0"},{"1":"976","2":"0"},{"1":"977","2":"0"},{"1":"978","2":"1"},{"1":"979","2":"1"},{"1":"980","2":"1"},{"1":"981","2":"1"},{"1":"982","2":"1"},{"1":"983","2":"0"},{"1":"984","2":"1"},{"1":"985","2":"0"},{"1":"986","2":"0"},{"1":"987","2":"0"},{"1":"988","2":"1"},{"1":"989","2":"0"},{"1":"990","2":"1"},{"1":"991","2":"0"},{"1":"992","2":"1"},{"1":"993","2":"0"},{"1":"994","2":"0"},{"1":"995","2":"0"},{"1":"996","2":"1"},{"1":"997","2":"0"},{"1":"998","2":"0"},{"1":"999","2":"0"},{"1":"1000","2":"0"},{"1":"1001","2":"0"},{"1":"1002","2":"0"},{"1":"1003","2":"1"},{"1":"1004","2":"1"},{"1":"1005","2":"1"},{"1":"1006","2":"1"},{"1":"1007","2":"0"},{"1":"1008","2":"0"},{"1":"1009","2":"1"},{"1":"1010","2":"0"},{"1":"1011","2":"1"},{"1":"1012","2":"1"},{"1":"1013","2":"0"},{"1":"1014","2":"1"},{"1":"1015","2":"0"},{"1":"1016","2":"0"},{"1":"1017","2":"1"},{"1":"1018","2":"0"},{"1":"1019","2":"1"},{"1":"1020","2":"0"},{"1":"1021","2":"0"},{"1":"1022","2":"0"},{"1":"1023","2":"0"},{"1":"1024","2":"1"},{"1":"1025","2":"0"},{"1":"1026","2":"0"},{"1":"1027","2":"0"},{"1":"1028","2":"0"},{"1":"1029","2":"0"},{"1":"1030","2":"1"},{"1":"1031","2":"0"},{"1":"1032","2":"0"},{"1":"1033","2":"1"},{"1":"1034","2":"0"},{"1":"1035","2":"0"},{"1":"1036","2":"0"},{"1":"1037","2":"0"},{"1":"1038","2":"0"},{"1":"1039","2":"0"},{"1":"1040","2":"0"},{"1":"1041","2":"0"},{"1":"1042","2":"1"},{"1":"1043","2":"0"},{"1":"1044","2":"0"},{"1":"1045","2":"1"},{"1":"1046","2":"0"},{"1":"1047","2":"0"},{"1":"1048","2":"1"},{"1":"1049","2":"1"},{"1":"1050","2":"0"},{"1":"1051","2":"1"},{"1":"1052","2":"1"},{"1":"1053","2":"1"},{"1":"1054","2":"1"},{"1":"1055","2":"0"},{"1":"1056","2":"0"},{"1":"1057","2":"1"},{"1":"1058","2":"0"},{"1":"1059","2":"0"},{"1":"1060","2":"1"},{"1":"1061","2":"1"},{"1":"1062","2":"0"},{"1":"1063","2":"0"},{"1":"1064","2":"0"},{"1":"1065","2":"0"},{"1":"1066","2":"0"},{"1":"1067","2":"1"},{"1":"1068","2":"1"},{"1":"1069","2":"0"},{"1":"1070","2":"1"},{"1":"1071","2":"1"},{"1":"1072","2":"0"},{"1":"1073","2":"0"},{"1":"1074","2":"1"},{"1":"1075","2":"0"},{"1":"1076","2":"1"},{"1":"1077","2":"0"},{"1":"1078","2":"1"},{"1":"1079","2":"0"},{"1":"1080","2":"0"},{"1":"1081","2":"0"},{"1":"1082","2":"0"},{"1":"1083","2":"0"},{"1":"1084","2":"1"},{"1":"1085","2":"0"},{"1":"1086","2":"1"},{"1":"1087","2":"0"},{"1":"1088","2":"1"},{"1":"1089","2":"1"},{"1":"1090","2":"0"},{"1":"1091","2":"1"},{"1":"1092","2":"1"},{"1":"1093","2":"1"},{"1":"1094","2":"0"},{"1":"1095","2":"1"},{"1":"1096","2":"0"},{"1":"1097","2":"0"},{"1":"1098","2":"1"},{"1":"1099","2":"0"},{"1":"1100","2":"1"},{"1":"1101","2":"0"},{"1":"1102","2":"0"},{"1":"1103","2":"0"},{"1":"1104","2":"0"},{"1":"1105","2":"1"},{"1":"1106","2":"0"},{"1":"1107","2":"0"},{"1":"1108","2":"1"},{"1":"1109","2":"0"},{"1":"1110","2":"1"},{"1":"1111","2":"0"},{"1":"1112","2":"1"},{"1":"1113","2":"0"},{"1":"1114","2":"1"},{"1":"1115","2":"0"},{"1":"1116","2":"1"},{"1":"1117","2":"1"},{"1":"1118","2":"0"},{"1":"1119","2":"1"},{"1":"1120","2":"0"},{"1":"1121","2":"0"},{"1":"1122","2":"0"},{"1":"1123","2":"1"},{"1":"1124","2":"0"},{"1":"1125","2":"0"},{"1":"1126","2":"0"},{"1":"1127","2":"0"},{"1":"1128","2":"0"},{"1":"1129","2":"0"},{"1":"1130","2":"1"},{"1":"1131","2":"1"},{"1":"1132","2":"1"},{"1":"1133","2":"1"},{"1":"1134","2":"0"},{"1":"1135","2":"0"},{"1":"1136","2":"1"},{"1":"1137","2":"0"},{"1":"1138","2":"1"},{"1":"1139","2":"0"},{"1":"1140","2":"1"},{"1":"1141","2":"1"},{"1":"1142","2":"1"},{"1":"1143","2":"0"},{"1":"1144","2":"0"},{"1":"1145","2":"0"},{"1":"1146","2":"0"},{"1":"1147","2":"0"},{"1":"1148","2":"0"},{"1":"1149","2":"0"},{"1":"1150","2":"1"},{"1":"1151","2":"0"},{"1":"1152","2":"0"},{"1":"1153","2":"0"},{"1":"1154","2":"1"},{"1":"1155","2":"1"},{"1":"1156","2":"0"},{"1":"1157","2":"0"},{"1":"1158","2":"0"},{"1":"1159","2":"0"},{"1":"1160","2":"1"},{"1":"1161","2":"0"},{"1":"1162","2":"0"},{"1":"1163","2":"0"},{"1":"1164","2":"1"},{"1":"1165","2":"1"},{"1":"1166","2":"0"},{"1":"1167","2":"1"},{"1":"1168","2":"0"},{"1":"1169","2":"0"},{"1":"1170","2":"0"},{"1":"1171","2":"0"},{"1":"1172","2":"1"},{"1":"1173","2":"1"},{"1":"1174","2":"1"},{"1":"1175","2":"1"},{"1":"1176","2":"1"},{"1":"1177","2":"0"},{"1":"1178","2":"0"},{"1":"1179","2":"0"},{"1":"1180","2":"0"},{"1":"1181","2":"0"},{"1":"1182","2":"0"},{"1":"1183","2":"1"},{"1":"1184","2":"0"},{"1":"1185","2":"0"},{"1":"1186","2":"0"},{"1":"1187","2":"0"},{"1":"1188","2":"1"},{"1":"1189","2":"0"},{"1":"1190","2":"0"},{"1":"1191","2":"0"},{"1":"1192","2":"0"},{"1":"1193","2":"0"},{"1":"1194","2":"0"},{"1":"1195","2":"0"},{"1":"1196","2":"1"},{"1":"1197","2":"1"},{"1":"1198","2":"0"},{"1":"1199","2":"1"},{"1":"1200","2":"0"},{"1":"1201","2":"1"},{"1":"1202","2":"0"},{"1":"1203","2":"0"},{"1":"1204","2":"0"},{"1":"1205","2":"1"},{"1":"1206","2":"1"},{"1":"1207","2":"1"},{"1":"1208","2":"0"},{"1":"1209","2":"0"},{"1":"1210","2":"0"},{"1":"1211","2":"0"},{"1":"1212","2":"0"},{"1":"1213","2":"0"},{"1":"1214","2":"0"},{"1":"1215","2":"0"},{"1":"1216","2":"1"},{"1":"1217","2":"0"},{"1":"1218","2":"1"},{"1":"1219","2":"0"},{"1":"1220","2":"0"},{"1":"1221","2":"0"},{"1":"1222","2":"1"},{"1":"1223","2":"0"},{"1":"1224","2":"0"},{"1":"1225","2":"1"},{"1":"1226","2":"0"},{"1":"1227","2":"0"},{"1":"1228","2":"0"},{"1":"1229","2":"0"},{"1":"1230","2":"0"},{"1":"1231","2":"1"},{"1":"1232","2":"0"},{"1":"1233","2":"0"},{"1":"1234","2":"0"},{"1":"1235","2":"1"},{"1":"1236","2":"1"},{"1":"1237","2":"1"},{"1":"1238","2":"0"},{"1":"1239","2":"1"},{"1":"1240","2":"0"},{"1":"1241","2":"1"},{"1":"1242","2":"1"},{"1":"1243","2":"0"},{"1":"1244","2":"0"},{"1":"1245","2":"0"},{"1":"1246","2":"1"},{"1":"1247","2":"0"},{"1":"1248","2":"1"},{"1":"1249","2":"0"},{"1":"1250","2":"0"},{"1":"1251","2":"1"},{"1":"1252","2":"0"},{"1":"1253","2":"1"},{"1":"1254","2":"1"},{"1":"1255","2":"0"},{"1":"1256","2":"1"},{"1":"1257","2":"1"},{"1":"1258","2":"0"},{"1":"1259","2":"1"},{"1":"1260","2":"1"},{"1":"1261","2":"0"},{"1":"1262","2":"0"},{"1":"1263","2":"1"},{"1":"1264","2":"0"},{"1":"1265","2":"0"},{"1":"1266","2":"1"},{"1":"1267","2":"1"},{"1":"1268","2":"1"},{"1":"1269","2":"0"},{"1":"1270","2":"0"},{"1":"1271","2":"0"},{"1":"1272","2":"0"},{"1":"1273","2":"0"},{"1":"1274","2":"1"},{"1":"1275","2":"1"},{"1":"1276","2":"0"},{"1":"1277","2":"1"},{"1":"1278","2":"0"},{"1":"1279","2":"0"},{"1":"1280","2":"0"},{"1":"1281","2":"0"},{"1":"1282","2":"1"},{"1":"1283","2":"1"},{"1":"1284","2":"1"},{"1":"1285","2":"0"},{"1":"1286","2":"0"},{"1":"1287","2":"1"},{"1":"1288","2":"0"},{"1":"1289","2":"1"},{"1":"1290","2":"0"},{"1":"1291","2":"0"},{"1":"1292","2":"1"},{"1":"1293","2":"0"},{"1":"1294","2":"1"},{"1":"1295","2":"1"},{"1":"1296","2":"0"},{"1":"1297","2":"0"},{"1":"1298","2":"0"},{"1":"1299","2":"0"},{"1":"1300","2":"1"},{"1":"1301","2":"1"},{"1":"1302","2":"1"},{"1":"1303","2":"1"},{"1":"1304","2":"1"},{"1":"1305","2":"0"},{"1":"1306","2":"1"},{"1":"1307","2":"0"},{"1":"1308","2":"0"},{"1":"1309","2":"1"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[418]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -408,13 +341,6 @@ Error in train.default(x, y, weights = w, ...) :
 <h1>Predict gbm</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6NDE4fSwicmRmIjoiSDRzSUFBQUFBQUFBQTYzWEIzaWNkUUhIOFV2eSs3YzBwY01OQ2lJT2NEVzJoVHB3QVJZRlFheXRZRUVjYVhKdFE5T2twa21ySWxvSE9CZ3FnZ3BPd0swTVpZcVQ2V0tqT05oT1VKeE1CNVhQcFRtZnAvY2tsNnZhNS9rMGQrLzkzL2ZlOS8vK3Y3bmM0b1ZMNTNjdTdheFVLdTJWam83MlNudUhoMm4zWDFzbGxXbTFuMitzVkRvZU5qcWdVcG5oK1NtZXY0WERlU3R2WXdOdjV4MjhrM2R4QkVmeWJ0N0RlM2tmUjNFMHgzQXM3K2NEZkpEaitCREhjd0lmNWlOOGxCTTVpWS94Y1Q3Qkova1VuK1prYXVkMktwL2hzM3lPei9NRnZzaVgrREpmNFRSTzV3ek81S3Q4amJNNG0zTTRsL000bjY5ekFkL2dtM3lMYi9NZHZzdUZYTVRGWE1LbFhNYjMrRDQvNElmOGlNdTVnaXU1aXF1NWhtdTVqaC96RTY3bnAveU1uL01MYnVCR2J1Sm1idUZXYnVPWC9JcGY4eHQreSsrNG5UdjRQWC9nVHY3SW4vZ3pmK0d2L0kyN3VKdDd1SmY3dUorLzh3Lyt5Yjk0Z0kzODI0S3BMWnEyVFFzblZsQnNTR0VLVTlrS2l5a1dXcWF6TmRaU1pqS0wyVHlFaDJLdDVlRThna2Z5S0xaaFd4N05ZOWlPN1hrc08vQTRkdVR4UElFbjhpUjJZbWVlekZONEtrL2o2Y3loaTJjd2wzbk1aeGQyWlFIUDVGazhtK2V3RzgvbGVUeWZGL0JDZG1jUDl1UkZMR1F2WHN4TDJKdDllQ243c2g4dlkzOWV6aUpld1dLVzhFb080RUJleFZJTzRtQmV6U0c4aHRmeU9sNVBOOHZvb1pjcXkxbkJTdm80bEZYMHM1b0JCbG5ER3hoaUxjT01zSTcxK0IyUU4vRm1Ea1AvMFgvMEgvMUgvOUYvOUIvOVIvL1JmL1FmL1VmLzBYLzBILzFILzlGLzlCLzlSLy9SZi9RZi9VZi8wWC8wSC8xSC85Ri85Qi85Ui8vUmYvUWYvVWYvMFgvMEgvMUgvOUYvOUIvOVIvL1JmL1FmL1VmLzBYLzBILzFILzlGLzlCLzlSLy9SZi9RZi9VZi8wWC8wSC8xSC85Ri85Qi85Ui8vUmYvUWYvVWYvMFgvMEgvMUgvOUYvOUIvOVIvL1JmL1FmL1VmLzBYLzBILzFILzlGLzlCLzlSLy9SZi9RZi9VZi8wWC8wSC8xSC85Ri85Qi85Ui8vUmYvUWYvVWYvMFgvMEgvMUgvOUYvOUIvOVIvL1JmL1FmL1VmLzBYLzBILzFILzlGLzlCLzlSLy9SZi9RZi9VdTlVdlJmOUYvMFgvUmZiQ3o2TC9vditpLzZML292K2kvNkwvb3YraS82TC9vditpLzZML292K2kvNkwvb3YraS82TC9vditpLzZML292K3U4WSt6enlZYlhwODZtdDRYSGp6L0ZlYjl5djhiWEdiVzNqYUhhY3ljYitOL3VQdCs5azE5TEt0b25PZGJKNWFIVytXM21QWnZlbzJUMXU1ZjNHMjcrWmljWlB0azZhalcrMkhwck5RU3ZYTmRHYy9hOXpPTkY1VEhhUC9oLzNmcnhyYU9WK05adjNadU1tR2ovUnViYXk5bG81NzFZYWFtVU9KanZHbGpUU2JQMU05SHVzMmRxWjdQRkUzYlRhVHJQN3RxWG4yTXI5YnpqR1psK2NwdlJYMTFYNy9UVlZtVDM2NnRqWHFibjFCL01heHBlZS91NjE5ZUgvT2NqeTdwN2h3U0dQTmpZT0graGVYVzA4K3ZSRkRsRWRXRkVkMm1maDJLYXRsb3dNcmV0YlYrMXQySC9hME9ENnJ2b3hadFNPc2FGUysxZjdQSzBOclAxZHY5bXBkUFoyRDNkM0xSK3l5emluTTNWd3pYRGY0SUNEdGRlK0xKYUduZHVHR2piTUdobW92WG52bko2Vkl3T3I1aXlvdmNIWVJGYkdUcWh0MDhuVUg5Y25PUFVUSy9VNWNzRjlBOVg2dlBSM0w2djJqejJaNlNKSHI3RnJ6VkRmd0hEOVNteGQyelU4T054ZEg5ZlpNOWhmM3pKNmJaV05Ed0xzaHVQMkdnOEFBQT09In0= -->
-<div data-pagedtable>
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["PassengerID"],"name":[1],"type":["int"],"align":["left"]},{"label":["Survived"],"name":[2],"type":["fctr"],"align":["left"]}],"data":[{"1":"892","2":"0"},{"1":"893","2":"1"},{"1":"894","2":"0"},{"1":"895","2":"0"},{"1":"896","2":"1"},{"1":"897","2":"0"},{"1":"898","2":"1"},{"1":"899","2":"0"},{"1":"900","2":"1"},{"1":"901","2":"0"},{"1":"902","2":"0"},{"1":"903","2":"0"},{"1":"904","2":"1"},{"1":"905","2":"0"},{"1":"906","2":"1"},{"1":"907","2":"1"},{"1":"908","2":"0"},{"1":"909","2":"0"},{"1":"910","2":"1"},{"1":"911","2":"1"},{"1":"912","2":"0"},{"1":"913","2":"1"},{"1":"914","2":"1"},{"1":"915","2":"1"},{"1":"916","2":"1"},{"1":"917","2":"0"},{"1":"918","2":"1"},{"1":"919","2":"0"},{"1":"920","2":"0"},{"1":"921","2":"0"},{"1":"922","2":"0"},{"1":"923","2":"0"},{"1":"924","2":"1"},{"1":"925","2":"1"},{"1":"926","2":"0"},{"1":"927","2":"0"},{"1":"928","2":"1"},{"1":"929","2":"1"},{"1":"930","2":"0"},{"1":"931","2":"0"},{"1":"932","2":"0"},{"1":"933","2":"0"},{"1":"934","2":"0"},{"1":"935","2":"1"},{"1":"936","2":"1"},{"1":"937","2":"0"},{"1":"938","2":"0"},{"1":"939","2":"0"},{"1":"940","2":"1"},{"1":"941","2":"1"},{"1":"942","2":"0"},{"1":"943","2":"0"},{"1":"944","2":"1"},{"1":"945","2":"1"},{"1":"946","2":"0"},{"1":"947","2":"0"},{"1":"948","2":"0"},{"1":"949","2":"0"},{"1":"950","2":"0"},{"1":"951","2":"1"},{"1":"952","2":"0"},{"1":"953","2":"0"},{"1":"954","2":"0"},{"1":"955","2":"1"},{"1":"956","2":"1"},{"1":"957","2":"1"},{"1":"958","2":"1"},{"1":"959","2":"0"},{"1":"960","2":"0"},{"1":"961","2":"1"},{"1":"962","2":"1"},{"1":"963","2":"0"},{"1":"964","2":"1"},{"1":"965","2":"0"},{"1":"966","2":"1"},{"1":"967","2":"1"},{"1":"968","2":"0"},{"1":"969","2":"1"},{"1":"970","2":"0"},{"1":"971","2":"1"},{"1":"972","2":"1"},{"1":"973","2":"0"},{"1":"974","2":"0"},{"1":"975","2":"0"},{"1":"976","2":"0"},{"1":"977","2":"0"},{"1":"978","2":"1"},{"1":"979","2":"1"},{"1":"980","2":"1"},{"1":"981","2":"1"},{"1":"982","2":"1"},{"1":"983","2":"0"},{"1":"984","2":"1"},{"1":"985","2":"0"},{"1":"986","2":"0"},{"1":"987","2":"0"},{"1":"988","2":"1"},{"1":"989","2":"0"},{"1":"990","2":"1"},{"1":"991","2":"0"},{"1":"992","2":"1"},{"1":"993","2":"0"},{"1":"994","2":"0"},{"1":"995","2":"0"},{"1":"996","2":"1"},{"1":"997","2":"0"},{"1":"998","2":"0"},{"1":"999","2":"0"},{"1":"1000","2":"0"},{"1":"1001","2":"0"},{"1":"1002","2":"0"},{"1":"1003","2":"1"},{"1":"1004","2":"1"},{"1":"1005","2":"1"},{"1":"1006","2":"1"},{"1":"1007","2":"0"},{"1":"1008","2":"0"},{"1":"1009","2":"1"},{"1":"1010","2":"0"},{"1":"1011","2":"1"},{"1":"1012","2":"1"},{"1":"1013","2":"0"},{"1":"1014","2":"1"},{"1":"1015","2":"0"},{"1":"1016","2":"0"},{"1":"1017","2":"1"},{"1":"1018","2":"0"},{"1":"1019","2":"1"},{"1":"1020","2":"0"},{"1":"1021","2":"0"},{"1":"1022","2":"0"},{"1":"1023","2":"0"},{"1":"1024","2":"1"},{"1":"1025","2":"0"},{"1":"1026","2":"0"},{"1":"1027","2":"0"},{"1":"1028","2":"0"},{"1":"1029","2":"0"},{"1":"1030","2":"1"},{"1":"1031","2":"0"},{"1":"1032","2":"0"},{"1":"1033","2":"1"},{"1":"1034","2":"0"},{"1":"1035","2":"0"},{"1":"1036","2":"0"},{"1":"1037","2":"0"},{"1":"1038","2":"0"},{"1":"1039","2":"0"},{"1":"1040","2":"0"},{"1":"1041","2":"0"},{"1":"1042","2":"1"},{"1":"1043","2":"0"},{"1":"1044","2":"0"},{"1":"1045","2":"1"},{"1":"1046","2":"0"},{"1":"1047","2":"0"},{"1":"1048","2":"1"},{"1":"1049","2":"1"},{"1":"1050","2":"0"},{"1":"1051","2":"1"},{"1":"1052","2":"1"},{"1":"1053","2":"1"},{"1":"1054","2":"1"},{"1":"1055","2":"0"},{"1":"1056","2":"0"},{"1":"1057","2":"1"},{"1":"1058","2":"0"},{"1":"1059","2":"0"},{"1":"1060","2":"1"},{"1":"1061","2":"1"},{"1":"1062","2":"0"},{"1":"1063","2":"0"},{"1":"1064","2":"0"},{"1":"1065","2":"0"},{"1":"1066","2":"0"},{"1":"1067","2":"1"},{"1":"1068","2":"1"},{"1":"1069","2":"0"},{"1":"1070","2":"1"},{"1":"1071","2":"1"},{"1":"1072","2":"0"},{"1":"1073","2":"0"},{"1":"1074","2":"1"},{"1":"1075","2":"0"},{"1":"1076","2":"1"},{"1":"1077","2":"0"},{"1":"1078","2":"1"},{"1":"1079","2":"0"},{"1":"1080","2":"0"},{"1":"1081","2":"0"},{"1":"1082","2":"0"},{"1":"1083","2":"0"},{"1":"1084","2":"1"},{"1":"1085","2":"0"},{"1":"1086","2":"1"},{"1":"1087","2":"0"},{"1":"1088","2":"1"},{"1":"1089","2":"1"},{"1":"1090","2":"0"},{"1":"1091","2":"1"},{"1":"1092","2":"1"},{"1":"1093","2":"1"},{"1":"1094","2":"0"},{"1":"1095","2":"1"},{"1":"1096","2":"0"},{"1":"1097","2":"0"},{"1":"1098","2":"1"},{"1":"1099","2":"0"},{"1":"1100","2":"1"},{"1":"1101","2":"0"},{"1":"1102","2":"0"},{"1":"1103","2":"0"},{"1":"1104","2":"0"},{"1":"1105","2":"1"},{"1":"1106","2":"0"},{"1":"1107","2":"0"},{"1":"1108","2":"1"},{"1":"1109","2":"0"},{"1":"1110","2":"1"},{"1":"1111","2":"0"},{"1":"1112","2":"1"},{"1":"1113","2":"0"},{"1":"1114","2":"1"},{"1":"1115","2":"0"},{"1":"1116","2":"1"},{"1":"1117","2":"1"},{"1":"1118","2":"0"},{"1":"1119","2":"1"},{"1":"1120","2":"0"},{"1":"1121","2":"0"},{"1":"1122","2":"0"},{"1":"1123","2":"1"},{"1":"1124","2":"0"},{"1":"1125","2":"0"},{"1":"1126","2":"0"},{"1":"1127","2":"0"},{"1":"1128","2":"0"},{"1":"1129","2":"0"},{"1":"1130","2":"1"},{"1":"1131","2":"1"},{"1":"1132","2":"1"},{"1":"1133","2":"1"},{"1":"1134","2":"0"},{"1":"1135","2":"0"},{"1":"1136","2":"1"},{"1":"1137","2":"0"},{"1":"1138","2":"1"},{"1":"1139","2":"0"},{"1":"1140","2":"1"},{"1":"1141","2":"1"},{"1":"1142","2":"1"},{"1":"1143","2":"0"},{"1":"1144","2":"0"},{"1":"1145","2":"0"},{"1":"1146","2":"0"},{"1":"1147","2":"0"},{"1":"1148","2":"0"},{"1":"1149","2":"0"},{"1":"1150","2":"1"},{"1":"1151","2":"0"},{"1":"1152","2":"0"},{"1":"1153","2":"0"},{"1":"1154","2":"1"},{"1":"1155","2":"1"},{"1":"1156","2":"0"},{"1":"1157","2":"0"},{"1":"1158","2":"0"},{"1":"1159","2":"0"},{"1":"1160","2":"1"},{"1":"1161","2":"0"},{"1":"1162","2":"0"},{"1":"1163","2":"0"},{"1":"1164","2":"1"},{"1":"1165","2":"1"},{"1":"1166","2":"0"},{"1":"1167","2":"1"},{"1":"1168","2":"0"},{"1":"1169","2":"0"},{"1":"1170","2":"0"},{"1":"1171","2":"0"},{"1":"1172","2":"1"},{"1":"1173","2":"1"},{"1":"1174","2":"1"},{"1":"1175","2":"1"},{"1":"1176","2":"1"},{"1":"1177","2":"0"},{"1":"1178","2":"0"},{"1":"1179","2":"0"},{"1":"1180","2":"0"},{"1":"1181","2":"0"},{"1":"1182","2":"0"},{"1":"1183","2":"1"},{"1":"1184","2":"0"},{"1":"1185","2":"0"},{"1":"1186","2":"0"},{"1":"1187","2":"0"},{"1":"1188","2":"1"},{"1":"1189","2":"0"},{"1":"1190","2":"0"},{"1":"1191","2":"0"},{"1":"1192","2":"0"},{"1":"1193","2":"0"},{"1":"1194","2":"0"},{"1":"1195","2":"0"},{"1":"1196","2":"1"},{"1":"1197","2":"1"},{"1":"1198","2":"0"},{"1":"1199","2":"1"},{"1":"1200","2":"0"},{"1":"1201","2":"1"},{"1":"1202","2":"0"},{"1":"1203","2":"0"},{"1":"1204","2":"0"},{"1":"1205","2":"1"},{"1":"1206","2":"1"},{"1":"1207","2":"1"},{"1":"1208","2":"0"},{"1":"1209","2":"0"},{"1":"1210","2":"0"},{"1":"1211","2":"0"},{"1":"1212","2":"0"},{"1":"1213","2":"0"},{"1":"1214","2":"0"},{"1":"1215","2":"0"},{"1":"1216","2":"1"},{"1":"1217","2":"0"},{"1":"1218","2":"1"},{"1":"1219","2":"0"},{"1":"1220","2":"0"},{"1":"1221","2":"0"},{"1":"1222","2":"1"},{"1":"1223","2":"0"},{"1":"1224","2":"0"},{"1":"1225","2":"1"},{"1":"1226","2":"0"},{"1":"1227","2":"0"},{"1":"1228","2":"0"},{"1":"1229","2":"0"},{"1":"1230","2":"0"},{"1":"1231","2":"1"},{"1":"1232","2":"0"},{"1":"1233","2":"0"},{"1":"1234","2":"0"},{"1":"1235","2":"1"},{"1":"1236","2":"1"},{"1":"1237","2":"1"},{"1":"1238","2":"0"},{"1":"1239","2":"1"},{"1":"1240","2":"0"},{"1":"1241","2":"1"},{"1":"1242","2":"1"},{"1":"1243","2":"0"},{"1":"1244","2":"0"},{"1":"1245","2":"0"},{"1":"1246","2":"1"},{"1":"1247","2":"0"},{"1":"1248","2":"1"},{"1":"1249","2":"0"},{"1":"1250","2":"0"},{"1":"1251","2":"1"},{"1":"1252","2":"0"},{"1":"1253","2":"1"},{"1":"1254","2":"1"},{"1":"1255","2":"0"},{"1":"1256","2":"1"},{"1":"1257","2":"1"},{"1":"1258","2":"0"},{"1":"1259","2":"1"},{"1":"1260","2":"1"},{"1":"1261","2":"0"},{"1":"1262","2":"0"},{"1":"1263","2":"1"},{"1":"1264","2":"0"},{"1":"1265","2":"0"},{"1":"1266","2":"1"},{"1":"1267","2":"1"},{"1":"1268","2":"1"},{"1":"1269","2":"0"},{"1":"1270","2":"0"},{"1":"1271","2":"0"},{"1":"1272","2":"0"},{"1":"1273","2":"0"},{"1":"1274","2":"1"},{"1":"1275","2":"1"},{"1":"1276","2":"0"},{"1":"1277","2":"1"},{"1":"1278","2":"0"},{"1":"1279","2":"0"},{"1":"1280","2":"0"},{"1":"1281","2":"0"},{"1":"1282","2":"1"},{"1":"1283","2":"1"},{"1":"1284","2":"1"},{"1":"1285","2":"0"},{"1":"1286","2":"0"},{"1":"1287","2":"1"},{"1":"1288","2":"0"},{"1":"1289","2":"1"},{"1":"1290","2":"0"},{"1":"1291","2":"0"},{"1":"1292","2":"1"},{"1":"1293","2":"0"},{"1":"1294","2":"1"},{"1":"1295","2":"1"},{"1":"1296","2":"0"},{"1":"1297","2":"0"},{"1":"1298","2":"0"},{"1":"1299","2":"0"},{"1":"1300","2":"1"},{"1":"1301","2":"1"},{"1":"1302","2":"1"},{"1":"1303","2":"1"},{"1":"1304","2":"1"},{"1":"1305","2":"0"},{"1":"1306","2":"1"},{"1":"1307","2":"0"},{"1":"1308","2":"0"},{"1":"1309","2":"1"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[418]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
