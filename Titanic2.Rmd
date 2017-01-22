@@ -78,10 +78,13 @@ fitControlGlmBoost <- trainControl(method = "repeatedcv",
 glmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title + Embarked, data = trainModImp, 
                  method = "glm",
                  trControl = fitControl)
+summary(glmModel)
+```
 
-gbmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
-                 method = "gbm",
-                 trControl = fitControl)
+```{r}
+#gbmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = trainModImp, 
+ #                method = "gbm",
+  #               trControl = fitControl)
 
 drops = c("Name", "Ticket", "Cabin", "Embarked", "PassengerId")
 glmBoostPreProc <- function(data) {
