@@ -83,16 +83,17 @@ gbmModel <- train(Survived ~ Pclass + Sex + Age + SibSp + Fare + Title, data = t
                  method = "gbm",
                  trControl = fitControl)
 
-
+drops = c("Name", "Ticket", "Cabin", "Embarked", "PassengerId")
 glmBoostPreProc <- function(data) {
-  drops = c("Name", "Ticket", "Cabin", "Embarked", "PassengerId")
   levels(data$Title) <- make.names(levels(data$Title))
   return(data[, -which(names(data) %in% drops)])
 }
 
 glmBoostTest <- glmBoostPreProc(testModImp)
+glmBoostTrain <- glmBoostPreProc(trainModImp)
+str(glmBoostTrain)
 
-glmBoostModel <- train(Survived ~ ., data = trainModImp[,-which(names(trainModImp) %in% drops)], 
+glmBoostModel <- train(Survived ~ ., data = glmBoostTrain[,-which(names(glmBoostTrain) %in% drops)], 
                  method = "glmboost", metric="ROC", tuneLength=5,
                  # family=binomial,
                  family=Binomial(link = c("logit")),
@@ -102,14 +103,15 @@ rf_model<-train(Survived~., data = trainModImp[,-which(names(trainModImp) %in% d
                 trControl=trainControl(method="cv",number=5),
                 prox=TRUE,allowParallel=TRUE)
 
-make.names(levels(trainModImp$Survived))
-str(trainModImp[,-which(names(trainModImp) %in% drops)])
+#make.names(levels(trainModImp$Survived))
+#str(trainModImp[,-which(names(trainModImp) %in% drops)])
 
 summary(gbmModel)
 summary(glmModel)
 summary(glmBoostModel)
 plot(glmBoostModel)
-head(rf_model)
+plot(rf_model)
+plot(gbmModel)
 ```
 # Predict glm
 ```{r}
