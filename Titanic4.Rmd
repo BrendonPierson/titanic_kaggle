@@ -1,0 +1,263 @@
+---
+title: "Titanic 3"
+output: html_notebook
+---
+
+# Load the data and libraries
+```{r, message = FALSE}
+install.packages('earth')
+?earth
+library('earth')
+library('mice')
+library('randomForest')
+library("rpart")
+library('caret')
+train <- read.csv('./input/train.csv', stringsAsFactors = F, na.strings="")
+test  <- read.csv('./input/test.csv', stringsAsFactors = F, na.strings="")
+```
+# Exploration
+```{r}
+plot(train$Age, factor(train$Sex))
+```
+
+# Functions
+### Add Title feature from name
+```{r}
+addTitle <- function(data) {
+  data$Title <- gsub('(.*, )|(\\..*)', '', data$Name)
+  
+  rare_titles <- c('Dona', 'Lady', 'the Countess','Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer')
+  
+  data$Title[data$Title == 'Mlle']        <- 'Miss'
+  data$Title[data$Title == 'Ms']          <- 'Miss'
+  data$Title[data$Title == 'Mme']         <- 'Mrs' 
+  data$Title[data$Title %in% rare_titles]  <- 'Rare Title'
+  data$Embarked[is.na(data$Embarked)] <- "S"
+  return(data)
+}
+```
+### Fix missing embarked in training set
+```{r}
+embarked <- function(data) {
+  data$Embarked[c(62, 830)] <- 'C'
+  return(data)
+}
+```
+### Add surname
+```{r}
+addSurname <- function(data) {
+  data$Surname <- sapply(data$Name,  
+                      function(x) strsplit(x, split = '[,.]')[[1]][1])
+  return(data)
+}
+```
+### Add family size
+```{r}
+addFamilySize <- function(data) {
+  data$Fsize <- data$SibSp + data$Parch + 1
+  
+    # Discretize family size
+  data$FsizeD[data$Fsize == 1] <- 'singleton'
+  data$FsizeD[data$Fsize < 5 & data$Fsize > 1] <- 'small'
+  data$FsizeD[data$Fsize > 4] <- 'large'
+
+  return(data)
+}
+```
+### factorize
+```{r}
+factorize <- function(data) {
+  factor_vars <- c('PassengerId','Pclass','Sex','Embarked',
+                 'Title','Surname','FsizeD')
+
+  data[factor_vars] <- lapply(data[factor_vars], function(x) as.factor(x))
+  return(data)
+}
+```
+### Impute Age
+```{r}
+impAge <- function(data) {
+  bad_cols <- c('PassengerId','Name','Ticket','Cabin','Family','Surname','Survived')
+  mice_mod <- mice(data[, !names(data) %in% bad_cols], method='rf') 
+  mice_output <- complete(mice_mod)
+  data$Age <- mice_output$Age
+  return(data)
+}
+```
+# Training
+### Apply functions
+```{r}
+nTrain = addTitle(train)
+nTrain = embarked(nTrain)
+nTrain = addSurname(nTrain)
+nTrain = addFamilySize(nTrain)
+nTrain = factorize(nTrain)
+nTrain = impAge(nTrain)
+
+nTrain
+
+```
+### Build decision tree
+```{r}
+treeFit <- rpart(Survived ~ Pclass + Sex + Age  + Parch + Fare + Embarked + Title + FsizeD,
+               data=nTrain, 
+               method="class")
+```
+### Decision tree with fewer factors
+```{r}
+smTreeFit <- rpart(Survived ~ Pclass + Sex + Age  + Parch + Fare + Embarked + Title + FsizeD,
+               data=nTrain, 
+               method="class")
+```
+### Predict decision tree fit
+```{r}
+treePrediction <- predict(treeFit, nTest, type = "class")
+treePrediction
+solution <- data.frame(PassengerID = nTest$PassengerId, Survived = treePrediction)
+write.csv(solution, file = 'rpart_tree_mod_Solution_1.csv', row.names = F)
+```
+### Predict sm decision tree fit
+```{r}
+smTreePrediction <- predict(smTreeFit, nTest, type = "class")
+smTreePrediction
+solution <- data.frame(PassengerID = nTest$PassengerId, Survived = smTreePrediction)
+write.csv(solution, file = 'rpart_tree_mod_Solution_2.csv', row.names = F)
+```
+### Build MARS model
+```{r}
+drops <- c("Cabin", "PassengerId", "Ticket", "Name", "Surname")
+nTrain <- nTrain[, !(names(nTrain) %in% drops)]
+nTrain
+nTest <- nTest[, !(names(nTest) %in% drops)]
+
+colSums(is.na(nTest))
+nTest[153,]
+
+class3 <- nTest[which(nTest$Pclass==3),]
+c3 <-nTrain[which(nTrain$Pclass==3),]
+c3
+class3
+#491 for c3
+#218 for class 3
+
+sum1<-sum(c3$Fare)
+
+averageFare <- (sum1)/(491)
+averageFare
+
+nTest[153,]$Fare <- averageFare
+nTest[153,]
+
+marsModel <- earth(Survived~., data=nTrain, trace=1, glm=list(family=binomial))
+summary(marsModel)
+marsGrid <- expand.grid(.degree = 1:2, .nprune = 2:16)
+set.seed(100)
+marsTuned <- train(factor(Survived)~., data=nTrain, trace=1, glm=list(family=binomial), method = "earth", tuneGrid = marsGrid, trControl= trainControl(method = "cv"))
+
+marsTuned
+varImp(marsTuned)
+varImp(marsModel)
+summary(marsTuned)
+summary(marsModel)
+```
+### Predict from Mars Tuned
+```{r}
+predictionMarsTuned <- predict(marsTuned, nTest, type = "raw")
+#p = ifelse(predictionGLM >= 0.5, 1, 0)
+solutionMT <- data.frame(PassengerID = test$PassengerId, Survived = predictionMarsTuned)
+write.csv(solutionMT, file = 'marsTuned_1.csv', row.names = F)
+
+
+predictionMars <- predict(marsModel, nTest, type = "class")
+#p = ifelse(predictionGLM >= 0.5, 1, 0)
+solutionM <- data.frame(PassengerID = test$PassengerId, Survived = predictionMars)
+write.csv(solutionM, file = 'mars_1.csv', row.names = F)
+```
+### Build random forest model
+```{r}
+set.seed(333)
+rf_model <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + 
+                                            Fare + Embarked + Title + 
+                                            FsizeD,
+                                            data = nTrain)
+plot(rf_model)
+```
+### Build random forest model with all factors
+```{r}
+set.seed(333)
+nTrain
+rf_model_allFactors <- randomForest(factor(Survived) ~., data = nTrain)
+solRFAllFactors <- predict(rf_model_allFactors, nTest)
+solRFAF <- data.frame(PassengerID = test$PassengerId, Survived = solRFAllFactors)
+solRFAF
+write.csv(solution, file = 'rf_mod_Solution_all_factors_2.csv', row.names = F)
+```
+# Evaluate Model
+```{r}
+importance <- importance(rf_model)
+
+varImportance <- data.frame(Variables = row.names(importance), 
+                            Importance = round(importance[ ,'MeanDecreaseGini'],2))
+
+rankImportance <- varImportance %>%
+  mutate(Rank = paste0('#',dense_rank(desc(Importance))))
+rankImportance
+```
+# Apply changes to test data
+```{r}
+nTest = addTitle(test)
+nTest = addSurname(nTest)
+nTest = addFamilySize(nTest)
+nTest = factorize(nTest)
+nTest = impAge(nTest)
+
+summary(nTest)
+```
+#Train Logistic Model
+```{r}
+
+glmModelAll <- glm(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Title + Embarked + Surname + FsizeD, data = nTrain, family="binomial")
+glmNoSurname <- glm(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Title + Embarked + FsizeD, data = nTrain, family="binomial")
+glmNoEmbarked <- glm(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Title  + FsizeD, data = nTrain, family="binomial")
+glmNoParch <- glm(factor(Survived) ~ Pclass + Age + SibSp + Sex + Fare + Title  + FsizeD, data = nTrain, family="binomial")
+glmNoSibSp <- glm(factor(Survived) ~ Pclass + Age + Sex + Fare + Title  + FsizeD, data = nTrain, family="binomial")
+glmBest <- glm(factor(Survived) ~ Pclass + Age + Sex + Title  + FsizeD, data = nTrain, family="binomial")
+
+glmNoSex <- glm(factor(Survived) ~ Pclass + Age + Title  + FsizeD, data = nTrain, family="binomial")
+
+anova(glmNoFare, glmNoSex, test ="Chisq")
+
+summary(glmNoFare)
+```
+#Predict GLM with Anova
+```{r}
+predictionGLM <- predict(glmBest, nTest, type = "response")
+p = ifelse(predictionGLM >= 0.5, 1, 0)
+solutionGLM <- data.frame(PassengerID = nTest$PassengerId, Survived = p)
+write.csv(solutionGLM, file = 'glmImp_1.csv', row.names = F)
+
+```
+#RF model
+```{r}
+prediction <- predict(rf_model, nTest, type = "response")
+
+length(nTest$PassengerId)
+length(prediction)
+passID <- as.vector(nTest$PassengerId)
+pred <- as.vector(prediction)
+solution <- data.frame(PassengerID = passID, Survived = pred)
+solution
+colSums()
+which(is.na(pred))
+pred[153] <- 0
+# Write the solution to file
+write.csv(solution, file = 'rf_mod_Solution_1.csv', row.names = F)
+```
+
+
+
+
+
+
+
+
